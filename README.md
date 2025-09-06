@@ -1,8 +1,8 @@
 # Product Advertising API 5.0 SDK for NodeJS
 
-[![NPM](https://nodei.co/npm/paapi5-nodejs-sdk.svg?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/paapi5-nodejs-sdk/)
+[![NPM](https://nodei.co/npm/@robot-inventor/paapi5-nodejs-sdk.svg?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/@robot-inventor/paapi5-nodejs-sdk/)
 
-[![Version](https://badge.fury.io/js/paapi5-nodejs-sdk.svg)](http://badge.fury.io/js/paapi5-nodejs-sdk) [![npm](https://img.shields.io/npm/dt/paapi5-nodejs-sdk.svg)](https://www.npmjs.com/package/paapi5-nodejs-sdk)
+[![Version](https://badge.fury.io/js/@robot-inventor/paapi5-nodejs-sdk.svg)](http://badge.fury.io/js/@robot-inventor/paapi5-nodejs-sdk) [![npm](https://img.shields.io/npm/dt/@robot-inventor/paapi5-nodejs-sdk.svg)](https://www.npmjs.com/package/@robot-inventor/paapi5-nodejs-sdk)
 
 > [!IMPORTANT]
 > This package is an unofficial distribution of the Product Advertising API 5.0 SDK for NodeJS. The sample code has been removed and TypeScript support has been added.
@@ -11,10 +11,10 @@
 
 ### For [Node.js](https://nodejs.org/)
 
-The Product Advertising API NodeJS SDK can be installed via [npm](https://www.npmjs.com/package/paapi5-nodejs-sdk):
+The Product Advertising API NodeJS SDK can be installed via [npm](https://www.npmjs.com/package/@robot-inventor/paapi5-nodejs-sdk):
 
 ```shell
-npm install paapi5-nodejs-sdk --save
+npm install @robot-inventor/paapi5-nodejs-sdk --save
 ```
 
 You should now be able to `require('paapi5-nodejs-sdk')` in javascript files.
