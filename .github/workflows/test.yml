@@ -3,11 +3,11 @@ name: Test
 on:
     push:
         branches: [main]
-
-concurrency: ${{ github.workflow }}-${{ github.ref }}
+    pull_request:
+        branches: [main]
 
 jobs:
-    test:
+    build:
         runs-on: ubuntu-latest
 
         permissions:
@@ -19,11 +19,9 @@ jobs:
 
         steps:
             - uses: actions/checkout@v5
-
             - name: Use Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@v4
+              uses: actions/setup-node@v5
               with:
                   node-version: ${{ matrix.node-version }}
-
             - run: npm ci
             - run: npm run test
