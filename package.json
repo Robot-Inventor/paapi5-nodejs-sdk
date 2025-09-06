@@ -1,6 +1,6 @@
 {
   "name": "@robot-inventor/paapi5-nodejs-sdk",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "ProductAdvertisingAPI 5.0 NodeJS SDK",
   "license": "Apache-2.0",
   "main": "src/index.js",
