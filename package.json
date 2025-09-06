@@ -13,10 +13,10 @@
     "url": "https://webservices.amazon.com/paapi5/documentation/index.html"
   },
   "types": "types/index.d.ts",
-  "homepage": "https://github.com/amzn/paapi5-nodejs-sdk",
+  "homepage": "https://github.com/Robot-Inventor/paapi5-nodejs-sdk",
   "repository": {
     "type": "git",
-    "url": "https://github.com/amzn/paapi5-nodejs-sdk"
+    "url": "https://github.com/Robot-Inventor/paapi5-nodejs-sdk"
   },
   "browser": {
     "fs": false
