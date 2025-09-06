@@ -6,6 +6,8 @@
 
 > [!IMPORTANT]
 > This package is an unofficial distribution of the Product Advertising API 5.0 SDK for NodeJS. The sample code has been removed and TypeScript support has been added.
+>
+> Current base version: v1.1.0
 
 ## Installation
 
