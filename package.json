@@ -5,7 +5,12 @@
   "license": "Apache-2.0",
   "main": "src/index.js",
   "scripts": {
-    "test": "mocha --recursive"
+    "test": "mocha --recursive",
+    "ci:version": "changeset version",
+    "ci:publish": "changeset publish"
+  },
+  "publishConfig": {
+    "provenance": true
   },
   "author": {
     "name": "Product Advertising API",
@@ -26,6 +31,8 @@
     "superagent": "3.7.0"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^0.5.1",
+    "@changesets/cli": "^2.29.6",
     "eslint": "^9.34.0",
     "expect.js": "~0.3.1",
     "mocha": "^10.0.0",
