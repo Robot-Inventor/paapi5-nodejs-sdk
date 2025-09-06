@@ -4,14 +4,15 @@
 
 [![Version](https://badge.fury.io/js/paapi5-nodejs-sdk.svg)](http://badge.fury.io/js/paapi5-nodejs-sdk) [![npm](https://img.shields.io/npm/dt/paapi5-nodejs-sdk.svg)](https://www.npmjs.com/package/paapi5-nodejs-sdk)
 
-This repository contains the official Product Advertising API 5.0 NodeJS SDK called **paapi5-nodejs-sdk** that allows you to access the [Product Advertising API](https://webservices.amazon.com/paapi5/documentation/index.html) from your NodeJS app.
+> [!IMPORTANT]
+> This package is an unofficial distribution of the Product Advertising API 5.0 SDK for NodeJS. The sample code has been removed and TypeScript support has been added.
 
 ## Installation
 
 ### For [Node.js](https://nodejs.org/)
 
 The Product Advertising API NodeJS SDK can be installed via [npm](https://www.npmjs.com/package/paapi5-nodejs-sdk):
- 
+
 ```shell
 npm install paapi5-nodejs-sdk --save
 ```
@@ -22,7 +23,7 @@ You should now be able to `require('paapi5-nodejs-sdk')` in javascript files.
 
 The library also works in the browser environment via npm and [browserify](http://browserify.org/). After following
 the above steps with Node.js and installing browserify with `npm install -g browserify`,
-perform the following (assuming *main.js* is your entry file, that's to say your javascript file where you actually 
+perform the following (assuming *main.js* is your entry file, that's to say your javascript file where you actually
 use this library):
 
 ```shell
