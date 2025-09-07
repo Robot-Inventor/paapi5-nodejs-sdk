@@ -140,6 +140,24 @@ function generateModelDts(name, srcPath, outPath, enumNames) {
   const members = parseMembers(src);
   const ctorParams = parseConstructorParams(src, name);
 
+  // Detect array-like models (runtime extends Array) and infer element type
+  const isArrayModel = /@extends\s+Array/.test(src);
+  let arrayElementTs = 'any';
+  if (isArrayModel) {
+    const m = src.match(/constructFromObject\(data, obj, ['"]([A-Za-z0-9_]+)['"]\)/);
+    if (m) {
+      const refName = m[1];
+      const modTs = mapJsDocTypeToTs(`module:model/${refName}`, currentFolder);
+      if (enumNames.has(refName)) {
+        arrayElementTs = `${modTs}[keyof ${modTs}]`;
+      } else {
+        arrayElementTs = `InstanceType<${modTs}>`;
+      }
+    } else {
+      arrayElementTs = 'any';
+    }
+  }
+
   const fields = members.map(({ name, rawType }) => {
     let tsType;
     if (/^module:/.test(rawType)) {
@@ -192,9 +210,12 @@ function generateModelDts(name, srcPath, outPath, enumNames) {
     return `  constructor(${parts});\n`;
   })();
 
+  const classHeader = isArrayModel
+    ? `declare class ${name} extends Array<${arrayElementTs}> {\n`
+    : `declare class ${name} {\n`;
+
   const content = `// Auto-generated from ${path.relative(process.cwd(), srcPath)}
-declare class ${name} {
-${ctorSig}${fields ? fields + '\n' : ''}  static constructFromObject(data: any, obj?: ${name}): ${name};
+${classHeader}${ctorSig}${fields ? fields + '\n' : ''}  static constructFromObject(data: any, obj?: ${name}): ${name};
 }
 export = ${name};
 `;
