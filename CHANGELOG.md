@@ -1,5 +1,15 @@
 # @robot-inventor/paapi5-nodejs-sdk
 
+## 0.0.3
+
+### Patch Changes
+
+- [#16](https://github.com/Robot-Inventor/paapi5-nodejs-sdk/pull/16) [`d206211`](https://github.com/Robot-Inventor/paapi5-nodejs-sdk/commit/d206211ac4b2af233a4e18c10c5fa08591d169b4) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - fix: accurately reflect `OfferListings` and `OfferListingsV2` type definitions
+
+- [#14](https://github.com/Robot-Inventor/paapi5-nodejs-sdk/pull/14) [`f373f37`](https://github.com/Robot-Inventor/paapi5-nodejs-sdk/commit/f373f37daf7082adb85dbb59a052f36e4e4946a2) Thanks [@renovate](https://github.com/apps/renovate)! - chore(deps): update dependency sinon to v21
+
+- [#15](https://github.com/Robot-Inventor/paapi5-nodejs-sdk/pull/15) [`30c5296`](https://github.com/Robot-Inventor/paapi5-nodejs-sdk/commit/30c52966c802b9b7c52badfca0ff31dc238a774b) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency superagent to v10
+
 ## 0.0.2
 
 ### Patch Changes
