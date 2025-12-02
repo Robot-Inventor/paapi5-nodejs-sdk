@@ -4,8 +4,8 @@
   "description": "ProductAdvertisingAPI 5.0 NodeJS SDK",
   "license": "Apache-2.0",
   "type": "module",
-  "main": "index.js",
-  "exports": "./index.js",
+  "main": "src/index.js",
+  "exports": "./src/index.js",
   "scripts": {
     "test": "mocha --recursive",
     "ci:version": "changeset version",
