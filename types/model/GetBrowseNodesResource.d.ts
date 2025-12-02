@@ -4,4 +4,4 @@ declare const GetBrowseNodesResource: {
   "BrowseNodes.Children": "BrowseNodes.Children";
   constructFromObject(object: any): any;
 };
-export = GetBrowseNodesResource;
+export default GetBrowseNodesResource;

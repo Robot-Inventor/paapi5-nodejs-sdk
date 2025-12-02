@@ -7,4 +7,4 @@ declare class UnitBasedAttribute {
   "Unit"?: string;
   static constructFromObject(data: any, obj?: UnitBasedAttribute): UnitBasedAttribute;
 }
-export = UnitBasedAttribute;
+export default UnitBasedAttribute;

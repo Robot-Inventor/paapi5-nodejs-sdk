@@ -4,4 +4,4 @@ declare class OfferLoyaltyPoints {
   "Points"?: number;
   static constructFromObject(data: any, obj?: OfferLoyaltyPoints): OfferLoyaltyPoints;
 }
-export = OfferLoyaltyPoints;
+export default OfferLoyaltyPoints;

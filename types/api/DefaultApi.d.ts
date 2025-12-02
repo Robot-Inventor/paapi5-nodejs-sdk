@@ -1,37 +1,37 @@
 // Auto-generated typings for DefaultApi
 declare class DefaultApi {
-  constructor(apiClient?: import('../ApiClient'));
+  constructor(apiClient?: import('../ApiClient').default);
 
   getBrowseNodesWithHttpInfo(
-    getBrowseNodesRequest: InstanceType<typeof import('../model/GetBrowseNodesRequest')>
-  ): Promise<{ data: InstanceType<typeof import('../model/GetBrowseNodesResponse')>; response: any }>;
+    getBrowseNodesRequest: InstanceType<typeof import('../model/GetBrowseNodesRequest').default>
+  ): Promise<{ data: InstanceType<typeof import('../model/GetBrowseNodesResponse').default>; response: any }>;
 
   getBrowseNodes(
-    getBrowseNodesRequest: InstanceType<typeof import('../model/GetBrowseNodesRequest')>
-  ): Promise<InstanceType<typeof import('../model/GetBrowseNodesResponse')>>;
+    getBrowseNodesRequest: InstanceType<typeof import('../model/GetBrowseNodesRequest').default>
+  ): Promise<InstanceType<typeof import('../model/GetBrowseNodesResponse').default>>;
 
   getItemsWithHttpInfo(
-    getItemsRequest: InstanceType<typeof import('../model/GetItemsRequest')>
-  ): Promise<{ data: InstanceType<typeof import('../model/GetItemsResponse')>; response: any }>;
+    getItemsRequest: InstanceType<typeof import('../model/GetItemsRequest').default>
+  ): Promise<{ data: InstanceType<typeof import('../model/GetItemsResponse').default>; response: any }>;
 
   getItems(
-    getItemsRequest: InstanceType<typeof import('../model/GetItemsRequest')>
-  ): Promise<InstanceType<typeof import('../model/GetItemsResponse')>>;
+    getItemsRequest: InstanceType<typeof import('../model/GetItemsRequest').default>
+  ): Promise<InstanceType<typeof import('../model/GetItemsResponse').default>>;
 
   getVariationsWithHttpInfo(
-    getVariationsRequest: InstanceType<typeof import('../model/GetVariationsRequest')>
-  ): Promise<{ data: InstanceType<typeof import('../model/GetVariationsResponse')>; response: any }>;
+    getVariationsRequest: InstanceType<typeof import('../model/GetVariationsRequest').default>
+  ): Promise<{ data: InstanceType<typeof import('../model/GetVariationsResponse').default>; response: any }>;
 
   getVariations(
-    getVariationsRequest: InstanceType<typeof import('../model/GetVariationsRequest')>
-  ): Promise<InstanceType<typeof import('../model/GetVariationsResponse')>>;
+    getVariationsRequest: InstanceType<typeof import('../model/GetVariationsRequest').default>
+  ): Promise<InstanceType<typeof import('../model/GetVariationsResponse').default>>;
 
   searchItemsWithHttpInfo(
-    searchItemsRequest: InstanceType<typeof import('../model/SearchItemsRequest')>
-  ): Promise<{ data: InstanceType<typeof import('../model/SearchItemsResponse')>; response: any }>;
+    searchItemsRequest: InstanceType<typeof import('../model/SearchItemsRequest').default>
+  ): Promise<{ data: InstanceType<typeof import('../model/SearchItemsResponse').default>; response: any }>;
 
   searchItems(
-    searchItemsRequest: InstanceType<typeof import('../model/SearchItemsRequest')>
-  ): Promise<InstanceType<typeof import('../model/SearchItemsResponse')>>;
+    searchItemsRequest: InstanceType<typeof import('../model/SearchItemsRequest').default>
+  ): Promise<InstanceType<typeof import('../model/SearchItemsResponse').default>>;
 }
-export = DefaultApi;
+export default DefaultApi;

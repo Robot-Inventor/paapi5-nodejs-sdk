@@ -2,7 +2,7 @@
 declare class CustomerReviews {
   constructor();
   "Count"?: number;
-  "StarRating"?: InstanceType<typeof import("./Rating")>;
+  "StarRating"?: InstanceType<typeof import("./Rating").default>;
   static constructFromObject(data: any, obj?: CustomerReviews): CustomerReviews;
 }
-export = CustomerReviews;
+export default CustomerReviews;

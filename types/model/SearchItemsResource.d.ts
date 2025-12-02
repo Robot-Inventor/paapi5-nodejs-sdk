@@ -62,4 +62,4 @@ declare const SearchItemsResource: {
   "SearchRefinements": "SearchRefinements";
   constructFromObject(object: any): any;
 };
-export = SearchItemsResource;
+export default SearchItemsResource;

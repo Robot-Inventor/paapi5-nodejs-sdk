@@ -64,4 +64,4 @@ declare const GetVariationsResource: {
   "VariationSummary.VariationDimension": "VariationSummary.VariationDimension";
   constructFromObject(object: any): any;
 };
-export = GetVariationsResource;
+export default GetVariationsResource;

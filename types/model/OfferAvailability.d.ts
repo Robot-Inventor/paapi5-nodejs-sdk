@@ -7,4 +7,4 @@ declare class OfferAvailability {
   "Type"?: string;
   static constructFromObject(data: any, obj?: OfferAvailability): OfferAvailability;
 }
-export = OfferAvailability;
+export default OfferAvailability;

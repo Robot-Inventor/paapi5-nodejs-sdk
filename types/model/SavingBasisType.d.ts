@@ -6,4 +6,4 @@ declare const SavingBasisType: {
   "WAS_PRICE": "WAS_PRICE";
   constructFromObject(object: any): any;
 };
-export = SavingBasisType;
+export default SavingBasisType;

@@ -47,4 +47,4 @@ declare class ApiClient {
   static constructFromObject(data: any, obj: any, itemType: any): void;
   static instance: ApiClient;
 }
-export = ApiClient;
+export default ApiClient;

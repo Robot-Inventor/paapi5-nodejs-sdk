@@ -5,9 +5,9 @@ declare class OfferPrice {
   "Currency"?: string;
   "DisplayAmount"?: string;
   "PricePerUnit"?: number;
-  "PriceType"?: typeof import("./PriceType")[keyof typeof import("./PriceType")];
+  "PriceType"?: typeof import("./PriceType").default[keyof typeof import("./PriceType").default];
   "PriceTypeLabel"?: string;
-  "Savings"?: InstanceType<typeof import("./OfferSavings")>;
+  "Savings"?: InstanceType<typeof import("./OfferSavings").default>;
   static constructFromObject(data: any, obj?: OfferPrice): OfferPrice;
 }
-export = OfferPrice;
+export default OfferPrice;

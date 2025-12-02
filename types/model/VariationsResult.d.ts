@@ -1,8 +1,8 @@
 // Auto-generated from src\model\VariationsResult.js
 declare class VariationsResult {
   constructor();
-  "Items"?: Array<InstanceType<typeof import("./Item")>>;
-  "VariationSummary"?: InstanceType<typeof import("./VariationSummary")>;
+  "Items"?: Array<InstanceType<typeof import("./Item").default>>;
+  "VariationSummary"?: InstanceType<typeof import("./VariationSummary").default>;
   static constructFromObject(data: any, obj?: VariationsResult): VariationsResult;
 }
-export = VariationsResult;
+export default VariationsResult;

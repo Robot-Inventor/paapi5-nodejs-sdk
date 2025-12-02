@@ -55,7 +55,7 @@ function mapJsDocTypeToTs(rawType, currentFolder) {
     // For models (classes) we want instance type. For enums/objects, value union. We cannot easily know here,
     // so return a flexible type that works for both: for classes, InstanceType<...>, for enums just the value type.
     // Callers (property emitters) decide how to wrap.
-    return `typeof import("${rel}")`;
+    return `typeof import("${rel}").default`;
   }
 
   const prim = mapPrim(t);
@@ -103,7 +103,7 @@ declare const ${name}: {
 ${props}
   constructFromObject(object: any): any;
 };
-export = ${name};
+export default ${name};
 `;
   write(outPath, content);
 }
@@ -241,7 +241,7 @@ ${classHeader}${ctorSig}${
     fields ? fields + "\n" : ""
   }  static constructFromObject(data: any, obj?: ${name}): ${name};
 }
-export = ${name};
+export default ${name};
 `;
   write(outPath, content);
 }
@@ -296,7 +296,7 @@ declare class ApiClient {
   static constructFromObject(data: any, obj: any, itemType: any): void;
   static instance: ApiClient;
 }
-export = ApiClient;
+export default ApiClient;
 `;
   write(outPath, content);
 }
@@ -304,41 +304,41 @@ export = ApiClient;
 function generateDefaultApiDts(outPath) {
   const content = `// Auto-generated typings for DefaultApi
 declare class DefaultApi {
-  constructor(apiClient?: import('../ApiClient'));
+  constructor(apiClient?: import('../ApiClient').default);
 
   getBrowseNodesWithHttpInfo(
-    getBrowseNodesRequest: InstanceType<typeof import('../model/GetBrowseNodesRequest')>
-  ): Promise<{ data: InstanceType<typeof import('../model/GetBrowseNodesResponse')>; response: any }>;
+    getBrowseNodesRequest: InstanceType<typeof import('../model/GetBrowseNodesRequest').default>
+  ): Promise<{ data: InstanceType<typeof import('../model/GetBrowseNodesResponse').default>; response: any }>;
 
   getBrowseNodes(
-    getBrowseNodesRequest: InstanceType<typeof import('../model/GetBrowseNodesRequest')>
-  ): Promise<InstanceType<typeof import('../model/GetBrowseNodesResponse')>>;
+    getBrowseNodesRequest: InstanceType<typeof import('../model/GetBrowseNodesRequest').default>
+  ): Promise<InstanceType<typeof import('../model/GetBrowseNodesResponse').default>>;
 
   getItemsWithHttpInfo(
-    getItemsRequest: InstanceType<typeof import('../model/GetItemsRequest')>
-  ): Promise<{ data: InstanceType<typeof import('../model/GetItemsResponse')>; response: any }>;
+    getItemsRequest: InstanceType<typeof import('../model/GetItemsRequest').default>
+  ): Promise<{ data: InstanceType<typeof import('../model/GetItemsResponse').default>; response: any }>;
 
   getItems(
-    getItemsRequest: InstanceType<typeof import('../model/GetItemsRequest')>
-  ): Promise<InstanceType<typeof import('../model/GetItemsResponse')>>;
+    getItemsRequest: InstanceType<typeof import('../model/GetItemsRequest').default>
+  ): Promise<InstanceType<typeof import('../model/GetItemsResponse').default>>;
 
   getVariationsWithHttpInfo(
-    getVariationsRequest: InstanceType<typeof import('../model/GetVariationsRequest')>
-  ): Promise<{ data: InstanceType<typeof import('../model/GetVariationsResponse')>; response: any }>;
+    getVariationsRequest: InstanceType<typeof import('../model/GetVariationsRequest').default>
+  ): Promise<{ data: InstanceType<typeof import('../model/GetVariationsResponse').default>; response: any }>;
 
   getVariations(
-    getVariationsRequest: InstanceType<typeof import('../model/GetVariationsRequest')>
-  ): Promise<InstanceType<typeof import('../model/GetVariationsResponse')>>;
+    getVariationsRequest: InstanceType<typeof import('../model/GetVariationsRequest').default>
+  ): Promise<InstanceType<typeof import('../model/GetVariationsResponse').default>>;
 
   searchItemsWithHttpInfo(
-    searchItemsRequest: InstanceType<typeof import('../model/SearchItemsRequest')>
-  ): Promise<{ data: InstanceType<typeof import('../model/SearchItemsResponse')>; response: any }>;
+    searchItemsRequest: InstanceType<typeof import('../model/SearchItemsRequest').default>
+  ): Promise<{ data: InstanceType<typeof import('../model/SearchItemsResponse').default>; response: any }>;
 
   searchItems(
-    searchItemsRequest: InstanceType<typeof import('../model/SearchItemsRequest')>
-  ): Promise<InstanceType<typeof import('../model/SearchItemsResponse')>>;
+    searchItemsRequest: InstanceType<typeof import('../model/SearchItemsRequest').default>
+  ): Promise<InstanceType<typeof import('../model/SearchItemsResponse').default>>;
 }
-export = DefaultApi;
+export default DefaultApi;
 `;
   write(outPath, content);
 }
@@ -386,7 +386,7 @@ declare const SignHelper: {
   ): string;
   toAmzDate(time: number | string | Date): string;
 };
-export = SignHelper;
+export default SignHelper;
 `;
   write(outPath, content);
 }
@@ -416,13 +416,13 @@ function generateIndexDts(srcPath, outPath) {
     if (exportedName === "ApiClient") rel = "./ApiClient";
     else if (exportedName === "DefaultApi") rel = "./api/DefaultApi";
     else rel = `./model/${exportedName}`;
-    return `  ${exportedName}: typeof import(${JSON.stringify(rel)});`;
+    return `  ${exportedName}: typeof import(${JSON.stringify(rel)}).default;`;
   });
   const content = `// Auto-generated typings for index.js aggregate
 declare const ProductAdvertisingAPIv1: {
 ${lines.join("\n")}
 };
-export = ProductAdvertisingAPIv1;
+export default ProductAdvertisingAPIv1;
 `;
   write(outPath, content);
 }

@@ -3,4 +3,4 @@ declare class MinSavingPercent {
   constructor();
   static constructFromObject(data: any, obj?: MinSavingPercent): MinSavingPercent;
 }
-export = MinSavingPercent;
+export default MinSavingPercent;

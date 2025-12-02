@@ -4,7 +4,7 @@ declare class OfferDeliveryInfo {
   "IsAmazonFulfilled"?: boolean;
   "IsFreeShippingEligible"?: boolean;
   "IsPrimeEligible"?: boolean;
-  "ShippingCharges"?: Array<InstanceType<typeof import("./OfferShippingCharge")>>;
+  "ShippingCharges"?: Array<InstanceType<typeof import("./OfferShippingCharge").default>>;
   static constructFromObject(data: any, obj?: OfferDeliveryInfo): OfferDeliveryInfo;
 }
-export = OfferDeliveryInfo;
+export default OfferDeliveryInfo;

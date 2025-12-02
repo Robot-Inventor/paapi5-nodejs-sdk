@@ -6,4 +6,4 @@ declare class SingleIntegerValuedAttribute {
   "Locale"?: string;
   static constructFromObject(data: any, obj?: SingleIntegerValuedAttribute): SingleIntegerValuedAttribute;
 }
-export = SingleIntegerValuedAttribute;
+export default SingleIntegerValuedAttribute;

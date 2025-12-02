@@ -9,4 +9,4 @@ declare class OfferPromotion {
   "Type"?: string;
   static constructFromObject(data: any, obj?: OfferPromotion): OfferPromotion;
 }
-export = OfferPromotion;
+export default OfferPromotion;

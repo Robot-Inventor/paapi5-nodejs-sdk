@@ -5,4 +5,4 @@ declare class LanguageType {
   "Type"?: string;
   static constructFromObject(data: any, obj?: LanguageType): LanguageType;
 }
-export = LanguageType;
+export default LanguageType;

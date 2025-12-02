@@ -1,8 +1,8 @@
 // Auto-generated from src\model\BrowseNode.js
 declare class BrowseNode {
   constructor();
-  "Ancestor"?: InstanceType<typeof import("./BrowseNodeAncestor")>;
-  "Children"?: Array<InstanceType<typeof import("./BrowseNodeChild")>>;
+  "Ancestor"?: InstanceType<typeof import("./BrowseNodeAncestor").default>;
+  "Children"?: Array<InstanceType<typeof import("./BrowseNodeChild").default>>;
   "ContextFreeName"?: string;
   "DisplayName"?: string;
   "Id"?: string;
@@ -10,4 +10,4 @@ declare class BrowseNode {
   "SalesRank"?: number;
   static constructFromObject(data: any, obj?: BrowseNode): BrowseNode;
 }
-export = BrowseNode;
+export default BrowseNode;

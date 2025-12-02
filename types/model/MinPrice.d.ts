@@ -3,4 +3,4 @@ declare class MinPrice {
   constructor();
   static constructFromObject(data: any, obj?: MinPrice): MinPrice;
 }
-export = MinPrice;
+export default MinPrice;

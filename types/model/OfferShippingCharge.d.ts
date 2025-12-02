@@ -8,4 +8,4 @@ declare class OfferShippingCharge {
   "Type"?: string;
   static constructFromObject(data: any, obj?: OfferShippingCharge): OfferShippingCharge;
 }
-export = OfferShippingCharge;
+export default OfferShippingCharge;

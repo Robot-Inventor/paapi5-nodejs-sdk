@@ -4,4 +4,4 @@ declare class OfferLoyaltyPointsV2 {
   "Points"?: number;
   static constructFromObject(data: any, obj?: OfferLoyaltyPointsV2): OfferLoyaltyPointsV2;
 }
-export = OfferLoyaltyPointsV2;
+export default OfferLoyaltyPointsV2;

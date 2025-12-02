@@ -3,4 +3,4 @@ declare const ItemIdType: {
   "ASIN": "ASIN";
   constructFromObject(object: any): any;
 };
-export = ItemIdType;
+export default ItemIdType;

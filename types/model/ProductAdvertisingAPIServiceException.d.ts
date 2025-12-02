@@ -4,4 +4,4 @@ declare class ProductAdvertisingAPIServiceException {
   "message"?: string;
   static constructFromObject(data: any, obj?: ProductAdvertisingAPIServiceException): ProductAdvertisingAPIServiceException;
 }
-export = ProductAdvertisingAPIServiceException;
+export default ProductAdvertisingAPIServiceException;

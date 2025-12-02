@@ -4,4 +4,4 @@ declare const Availability: {
   "IncludeOutOfStock": "IncludeOutOfStock";
   constructFromObject(object: any): any;
 };
-export = Availability;
+export default Availability;

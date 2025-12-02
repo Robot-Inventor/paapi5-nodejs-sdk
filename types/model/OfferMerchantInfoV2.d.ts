@@ -5,4 +5,4 @@ declare class OfferMerchantInfoV2 {
   "Id"?: string;
   static constructFromObject(data: any, obj?: OfferMerchantInfoV2): OfferMerchantInfoV2;
 }
-export = OfferMerchantInfoV2;
+export default OfferMerchantInfoV2;

@@ -8,4 +8,4 @@ declare const SortBy: {
   "Relevance": "Relevance";
   constructFromObject(object: any): any;
 };
-export = SortBy;
+export default SortBy;

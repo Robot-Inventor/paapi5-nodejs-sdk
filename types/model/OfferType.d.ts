@@ -4,4 +4,4 @@ declare const OfferType: {
   "LIGHTNING_DEAL": "LIGHTNING_DEAL";
   constructFromObject(object: any): any;
 };
-export = OfferType;
+export default OfferType;

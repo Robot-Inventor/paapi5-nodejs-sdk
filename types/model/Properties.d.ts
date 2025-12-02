@@ -3,4 +3,4 @@ declare class Properties {
   constructor();
   static constructFromObject(data: any, obj?: Properties): Properties;
 }
-export = Properties;
+export default Properties;

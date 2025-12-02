@@ -7,4 +7,4 @@ declare class OfferSubCondition {
   "Value"?: string;
   static constructFromObject(data: any, obj?: OfferSubCondition): OfferSubCondition;
 }
-export = OfferSubCondition;
+export default OfferSubCondition;

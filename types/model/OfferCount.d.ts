@@ -3,4 +3,4 @@ declare class OfferCount {
   constructor();
   static constructFromObject(data: any, obj?: OfferCount): OfferCount;
 }
-export = OfferCount;
+export default OfferCount;

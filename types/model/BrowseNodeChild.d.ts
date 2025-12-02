@@ -6,4 +6,4 @@ declare class BrowseNodeChild {
   "Id"?: string;
   static constructFromObject(data: any, obj?: BrowseNodeChild): BrowseNodeChild;
 }
-export = BrowseNodeChild;
+export default BrowseNodeChild;

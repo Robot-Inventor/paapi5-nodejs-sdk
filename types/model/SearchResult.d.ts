@@ -3,8 +3,8 @@ declare class SearchResult {
   constructor();
   "TotalResultCount"?: number;
   "SearchURL"?: string;
-  "Items"?: Array<InstanceType<typeof import("./Item")>>;
-  "SearchRefinements"?: InstanceType<typeof import("./SearchRefinements")>;
+  "Items"?: Array<InstanceType<typeof import("./Item").default>>;
+  "SearchRefinements"?: InstanceType<typeof import("./SearchRefinements").default>;
   static constructFromObject(data: any, obj?: SearchResult): SearchResult;
 }
-export = SearchResult;
+export default SearchResult;
