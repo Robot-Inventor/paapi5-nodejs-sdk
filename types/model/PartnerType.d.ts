@@ -3,4 +3,4 @@ declare const PartnerType: {
   "Associates": "Associates";
   constructFromObject(object: any): any;
 };
-export = PartnerType;
+export default PartnerType;

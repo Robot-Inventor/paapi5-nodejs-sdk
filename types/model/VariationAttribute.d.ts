@@ -5,4 +5,4 @@ declare class VariationAttribute {
   "Value"?: string;
   static constructFromObject(data: any, obj?: VariationAttribute): VariationAttribute;
 }
-export = VariationAttribute;
+export default VariationAttribute;

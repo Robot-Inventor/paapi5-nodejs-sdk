@@ -18,23 +18,17 @@
  * https://webservices.amazon.com/paapi5/documentation/index.html
  *
  */
+import ApiClient from '../ApiClient.js';
+import DealDetails from './DealDetails.js';
+import OfferAvailabilityV2 from './OfferAvailabilityV2.js';
+import OfferConditionV2 from './OfferConditionV2.js';
+import OfferLoyaltyPointsV2 from './OfferLoyaltyPointsV2.js';
+import OfferMerchantInfoV2 from './OfferMerchantInfoV2.js';
+import OfferPriceV2 from './OfferPriceV2.js';
+import OfferType from './OfferType.js';
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/DealDetails', 'model/OfferAvailabilityV2', 'model/OfferConditionV2', 'model/OfferLoyaltyPointsV2', 'model/OfferMerchantInfoV2', 'model/OfferPriceV2', 'model/OfferType'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./DealDetails'), require('./OfferAvailabilityV2'), require('./OfferConditionV2'), require('./OfferLoyaltyPointsV2'), require('./OfferMerchantInfoV2'), require('./OfferPriceV2'), require('./OfferType'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.ProductAdvertisingAPIv1) {
-      root.ProductAdvertisingAPIv1 = {};
-    }
-    root.ProductAdvertisingAPIv1.OfferListingV2 = factory(root.ProductAdvertisingAPIv1.ApiClient, root.ProductAdvertisingAPIv1.DealDetails, root.ProductAdvertisingAPIv1.OfferAvailabilityV2, root.ProductAdvertisingAPIv1.OfferConditionV2, root.ProductAdvertisingAPIv1.OfferLoyaltyPointsV2, root.ProductAdvertisingAPIv1.OfferMerchantInfoV2, root.ProductAdvertisingAPIv1.OfferPriceV2, root.ProductAdvertisingAPIv1.OfferType);
-  }
-}(this, function(ApiClient, DealDetails, OfferAvailabilityV2, OfferConditionV2, OfferLoyaltyPointsV2, OfferMerchantInfoV2, OfferPriceV2, OfferType) {
-  'use strict';
+const exports = (() => {
+'use strict';
 
 
 
@@ -145,7 +139,8 @@
 
 
 
+  
   return exports;
-}));
+})();
 
-
+export default exports;

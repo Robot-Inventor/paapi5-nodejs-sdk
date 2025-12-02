@@ -6,4 +6,4 @@ declare const PriceType: {
   "WAS_PRICE": "WAS_PRICE";
   constructFromObject(object: any): any;
 };
-export = PriceType;
+export default PriceType;

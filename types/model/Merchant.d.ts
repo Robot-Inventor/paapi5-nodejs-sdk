@@ -4,4 +4,4 @@ declare const Merchant: {
   "Amazon": "Amazon";
   constructFromObject(object: any): any;
 };
-export = Merchant;
+export default Merchant;

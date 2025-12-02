@@ -2,9 +2,9 @@
 declare class VariationSummary {
   constructor();
   "PageCount"?: number;
-  "Price"?: InstanceType<typeof import("./Price")>;
+  "Price"?: InstanceType<typeof import("./Price").default>;
   "VariationCount"?: number;
-  "VariationDimensions"?: Array<InstanceType<typeof import("./VariationDimension")>>;
+  "VariationDimensions"?: Array<InstanceType<typeof import("./VariationDimension").default>>;
   static constructFromObject(data: any, obj?: VariationSummary): VariationSummary;
 }
-export = VariationSummary;
+export default VariationSummary;

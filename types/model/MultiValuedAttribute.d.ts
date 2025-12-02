@@ -6,4 +6,4 @@ declare class MultiValuedAttribute {
   "Locale"?: string;
   static constructFromObject(data: any, obj?: MultiValuedAttribute): MultiValuedAttribute;
 }
-export = MultiValuedAttribute;
+export default MultiValuedAttribute;

@@ -3,4 +3,4 @@ declare class SearchIndex {
   constructor();
   static constructFromObject(data: any, obj?: SearchIndex): SearchIndex;
 }
-export = SearchIndex;
+export default SearchIndex;

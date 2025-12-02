@@ -7,4 +7,4 @@ declare const Condition: {
   "Used": "Used";
   constructFromObject(object: any): any;
 };
-export = Condition;
+export default Condition;

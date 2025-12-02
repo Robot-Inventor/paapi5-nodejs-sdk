@@ -5,8 +5,8 @@ declare class OfferCondition {
   "Label"?: string;
   "Locale"?: string;
   "Value"?: string;
-  "SubCondition"?: InstanceType<typeof import("./OfferSubCondition")>;
-  "ConditionNote"?: InstanceType<typeof import("./OfferConditionNote")>;
+  "SubCondition"?: InstanceType<typeof import("./OfferSubCondition").default>;
+  "ConditionNote"?: InstanceType<typeof import("./OfferConditionNote").default>;
   static constructFromObject(data: any, obj?: OfferCondition): OfferCondition;
 }
-export = OfferCondition;
+export default OfferCondition;

@@ -7,4 +7,4 @@ declare class VariationDimension {
   "Values"?: Array<string>;
   static constructFromObject(data: any, obj?: VariationDimension): VariationDimension;
 }
-export = VariationDimension;
+export default VariationDimension;

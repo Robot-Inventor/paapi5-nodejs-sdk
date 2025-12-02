@@ -4,4 +4,4 @@ declare class Rating {
   "Value"?: number;
   static constructFromObject(data: any, obj?: Rating): Rating;
 }
-export = Rating;
+export default Rating;

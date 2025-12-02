@@ -40,4 +40,4 @@ declare const SignHelper: {
   ): string;
   toAmzDate(time: number | string | Date): string;
 };
-export = SignHelper;
+export default SignHelper;

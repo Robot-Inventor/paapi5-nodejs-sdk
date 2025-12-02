@@ -18,23 +18,18 @@
  * https://webservices.amazon.com/paapi5/documentation/index.html
  *
  */
+import ApiClient from '../ApiClient.js';
+import BrowseNodeInfo from './BrowseNodeInfo.js';
+import CustomerReviews from './CustomerReviews.js';
+import Images from './Images.js';
+import ItemInfo from './ItemInfo.js';
+import Offers from './Offers.js';
+import OffersV2 from './OffersV2.js';
+import RentalOffers from './RentalOffers.js';
+import VariationAttribute from './VariationAttribute.js';
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/BrowseNodeInfo', 'model/CustomerReviews', 'model/Images', 'model/ItemInfo', 'model/Offers', 'model/OffersV2', 'model/RentalOffers', 'model/VariationAttribute'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./BrowseNodeInfo'), require('./CustomerReviews'), require('./Images'), require('./ItemInfo'), require('./Offers'), require('./OffersV2'), require('./RentalOffers'), require('./VariationAttribute'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.ProductAdvertisingAPIv1) {
-      root.ProductAdvertisingAPIv1 = {};
-    }
-    root.ProductAdvertisingAPIv1.Item = factory(root.ProductAdvertisingAPIv1.ApiClient, root.ProductAdvertisingAPIv1.BrowseNodeInfo, root.ProductAdvertisingAPIv1.CustomerReviews, root.ProductAdvertisingAPIv1.Images, root.ProductAdvertisingAPIv1.ItemInfo, root.ProductAdvertisingAPIv1.Offers, root.ProductAdvertisingAPIv1.OffersV2, root.ProductAdvertisingAPIv1.RentalOffers, root.ProductAdvertisingAPIv1.VariationAttribute);
-  }
-}(this, function(ApiClient, BrowseNodeInfo, CustomerReviews, Images, ItemInfo, Offers, OffersV2, RentalOffers, VariationAttribute) {
-  'use strict';
+const exports = (() => {
+'use strict';
 
 
 
@@ -169,7 +164,8 @@
 
 
 
+  
   return exports;
-}));
+})();
 
-
+export default exports;

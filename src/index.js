@@ -18,17 +18,117 @@
  * https://webservices.amazon.com/paapi5/documentation/index.html
  *
  */
+import ApiClient from './ApiClient.js';
+import Availability from './model/Availability.js';
+import BigDecimal from './model/BigDecimal.js';
+import BrowseNode from './model/BrowseNode.js';
+import BrowseNodeAncestor from './model/BrowseNodeAncestor.js';
+import BrowseNodeChild from './model/BrowseNodeChild.js';
+import BrowseNodeInfo from './model/BrowseNodeInfo.js';
+import BrowseNodesResult from './model/BrowseNodesResult.js';
+import ByLineInfo from './model/ByLineInfo.js';
+import Classifications from './model/Classifications.js';
+import Condition from './model/Condition.js';
+import ContentInfo from './model/ContentInfo.js';
+import ContentRating from './model/ContentRating.js';
+import Contributor from './model/Contributor.js';
+import CustomerReviews from './model/CustomerReviews.js';
+import DealDetails from './model/DealDetails.js';
+import DeliveryFlag from './model/DeliveryFlag.js';
+import DimensionBasedAttribute from './model/DimensionBasedAttribute.js';
+import DurationPrice from './model/DurationPrice.js';
+import ErrorData from './model/ErrorData.js';
+import ExternalIds from './model/ExternalIds.js';
+import GetBrowseNodesRequest from './model/GetBrowseNodesRequest.js';
+import GetBrowseNodesResource from './model/GetBrowseNodesResource.js';
+import GetBrowseNodesResponse from './model/GetBrowseNodesResponse.js';
+import GetItemsRequest from './model/GetItemsRequest.js';
+import GetItemsResource from './model/GetItemsResource.js';
+import GetItemsResponse from './model/GetItemsResponse.js';
+import GetVariationsRequest from './model/GetVariationsRequest.js';
+import GetVariationsResource from './model/GetVariationsResource.js';
+import GetVariationsResponse from './model/GetVariationsResponse.js';
+import ImageSize from './model/ImageSize.js';
+import ImageType from './model/ImageType.js';
+import Images from './model/Images.js';
+import Item from './model/Item.js';
+import ItemIdType from './model/ItemIdType.js';
+import ItemInfo from './model/ItemInfo.js';
+import ItemsResult from './model/ItemsResult.js';
+import LanguageType from './model/LanguageType.js';
+import Languages from './model/Languages.js';
+import ManufactureInfo from './model/ManufactureInfo.js';
+import MaxPrice from './model/MaxPrice.js';
+import Merchant from './model/Merchant.js';
+import MinPrice from './model/MinPrice.js';
+import MinReviewsRating from './model/MinReviewsRating.js';
+import MinSavingPercent from './model/MinSavingPercent.js';
+import Money from './model/Money.js';
+import MultiValuedAttribute from './model/MultiValuedAttribute.js';
+import OfferAvailability from './model/OfferAvailability.js';
+import OfferAvailabilityV2 from './model/OfferAvailabilityV2.js';
+import OfferCondition from './model/OfferCondition.js';
+import OfferConditionNote from './model/OfferConditionNote.js';
+import OfferConditionV2 from './model/OfferConditionV2.js';
+import OfferCount from './model/OfferCount.js';
+import OfferDeliveryInfo from './model/OfferDeliveryInfo.js';
+import OfferListing from './model/OfferListing.js';
+import OfferListingV2 from './model/OfferListingV2.js';
+import OfferListings from './model/OfferListings.js';
+import OfferListingsV2 from './model/OfferListingsV2.js';
+import OfferLoyaltyPoints from './model/OfferLoyaltyPoints.js';
+import OfferLoyaltyPointsV2 from './model/OfferLoyaltyPointsV2.js';
+import OfferMerchantInfo from './model/OfferMerchantInfo.js';
+import OfferMerchantInfoV2 from './model/OfferMerchantInfoV2.js';
+import OfferPrice from './model/OfferPrice.js';
+import OfferPriceV2 from './model/OfferPriceV2.js';
+import OfferProgramEligibility from './model/OfferProgramEligibility.js';
+import OfferPromotion from './model/OfferPromotion.js';
+import OfferSavingBasis from './model/OfferSavingBasis.js';
+import OfferSavings from './model/OfferSavings.js';
+import OfferSavingsV2 from './model/OfferSavingsV2.js';
+import OfferShippingCharge from './model/OfferShippingCharge.js';
+import OfferSubCondition from './model/OfferSubCondition.js';
+import OfferSummary from './model/OfferSummary.js';
+import OfferType from './model/OfferType.js';
+import Offers from './model/Offers.js';
+import OffersV2 from './model/OffersV2.js';
+import PartnerType from './model/PartnerType.js';
+import Price from './model/Price.js';
+import PriceType from './model/PriceType.js';
+import ProductAdvertisingAPIClientException from './model/ProductAdvertisingAPIClientException.js';
+import ProductAdvertisingAPIServiceException from './model/ProductAdvertisingAPIServiceException.js';
+import ProductInfo from './model/ProductInfo.js';
+import Properties from './model/Properties.js';
+import Rating from './model/Rating.js';
+import Refinement from './model/Refinement.js';
+import RefinementBin from './model/RefinementBin.js';
+import RentalOfferListing from './model/RentalOfferListing.js';
+import RentalOffers from './model/RentalOffers.js';
+import SavingBasisType from './model/SavingBasisType.js';
+import SearchIndex from './model/SearchIndex.js';
+import SearchItemsRequest from './model/SearchItemsRequest.js';
+import SearchItemsResource from './model/SearchItemsResource.js';
+import SearchItemsResponse from './model/SearchItemsResponse.js';
+import SearchRefinements from './model/SearchRefinements.js';
+import SearchResult from './model/SearchResult.js';
+import SingleBooleanValuedAttribute from './model/SingleBooleanValuedAttribute.js';
+import SingleIntegerValuedAttribute from './model/SingleIntegerValuedAttribute.js';
+import SingleStringValuedAttribute from './model/SingleStringValuedAttribute.js';
+import SortBy from './model/SortBy.js';
+import TechnicalInfo from './model/TechnicalInfo.js';
+import TradeInInfo from './model/TradeInInfo.js';
+import TradeInPrice from './model/TradeInPrice.js';
+import UnitBasedAttribute from './model/UnitBasedAttribute.js';
+import VariationAttribute from './model/VariationAttribute.js';
+import VariationDimension from './model/VariationDimension.js';
+import VariationSummary from './model/VariationSummary.js';
+import VariationsResult from './model/VariationsResult.js';
+import WebsiteSalesRank from './model/WebsiteSalesRank.js';
+import DefaultApi from './api/DefaultApi.js';
 
-(function(factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/Availability', 'model/BigDecimal', 'model/BrowseNode', 'model/BrowseNodeAncestor', 'model/BrowseNodeChild', 'model/BrowseNodeInfo', 'model/BrowseNodesResult', 'model/ByLineInfo', 'model/Classifications', 'model/Condition', 'model/ContentInfo', 'model/ContentRating', 'model/Contributor', 'model/CustomerReviews', 'model/DealDetails', 'model/DeliveryFlag', 'model/DimensionBasedAttribute', 'model/DurationPrice', 'model/ErrorData', 'model/ExternalIds', 'model/GetBrowseNodesRequest', 'model/GetBrowseNodesResource', 'model/GetBrowseNodesResponse', 'model/GetItemsRequest', 'model/GetItemsResource', 'model/GetItemsResponse', 'model/GetVariationsRequest', 'model/GetVariationsResource', 'model/GetVariationsResponse', 'model/ImageSize', 'model/ImageType', 'model/Images', 'model/Item', 'model/ItemIdType', 'model/ItemInfo', 'model/ItemsResult', 'model/LanguageType', 'model/Languages', 'model/ManufactureInfo', 'model/MaxPrice', 'model/Merchant', 'model/MinPrice', 'model/MinReviewsRating', 'model/MinSavingPercent', 'model/Money', 'model/MultiValuedAttribute', 'model/OfferAvailability', 'model/OfferAvailabilityV2', 'model/OfferCondition', 'model/OfferConditionNote', 'model/OfferConditionV2', 'model/OfferCount', 'model/OfferDeliveryInfo', 'model/OfferListing', 'model/OfferListingV2', 'model/OfferListings', 'model/OfferListingsV2', 'model/OfferLoyaltyPoints', 'model/OfferLoyaltyPointsV2', 'model/OfferMerchantInfo', 'model/OfferMerchantInfoV2', 'model/OfferPrice', 'model/OfferPriceV2', 'model/OfferProgramEligibility', 'model/OfferPromotion', 'model/OfferSavingBasis', 'model/OfferSavings', 'model/OfferSavingsV2', 'model/OfferShippingCharge', 'model/OfferSubCondition', 'model/OfferSummary', 'model/OfferType', 'model/Offers', 'model/OffersV2', 'model/PartnerType', 'model/Price', 'model/PriceType', 'model/ProductAdvertisingAPIClientException', 'model/ProductAdvertisingAPIServiceException', 'model/ProductInfo', 'model/Properties', 'model/Rating', 'model/Refinement', 'model/RefinementBin', 'model/RentalOfferListing', 'model/RentalOffers', 'model/SavingBasisType', 'model/SearchIndex', 'model/SearchItemsRequest', 'model/SearchItemsResource', 'model/SearchItemsResponse', 'model/SearchRefinements', 'model/SearchResult', 'model/SingleBooleanValuedAttribute', 'model/SingleIntegerValuedAttribute', 'model/SingleStringValuedAttribute', 'model/SortBy', 'model/TechnicalInfo', 'model/TradeInInfo', 'model/TradeInPrice', 'model/UnitBasedAttribute', 'model/VariationAttribute', 'model/VariationDimension', 'model/VariationSummary', 'model/VariationsResult', 'model/WebsiteSalesRank', 'api/DefaultApi'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('./ApiClient'), require('./model/Availability'), require('./model/BigDecimal'), require('./model/BrowseNode'), require('./model/BrowseNodeAncestor'), require('./model/BrowseNodeChild'), require('./model/BrowseNodeInfo'), require('./model/BrowseNodesResult'), require('./model/ByLineInfo'), require('./model/Classifications'), require('./model/Condition'), require('./model/ContentInfo'), require('./model/ContentRating'), require('./model/Contributor'), require('./model/CustomerReviews'), require('./model/DealDetails'), require('./model/DeliveryFlag'), require('./model/DimensionBasedAttribute'), require('./model/DurationPrice'), require('./model/ErrorData'), require('./model/ExternalIds'), require('./model/GetBrowseNodesRequest'), require('./model/GetBrowseNodesResource'), require('./model/GetBrowseNodesResponse'), require('./model/GetItemsRequest'), require('./model/GetItemsResource'), require('./model/GetItemsResponse'), require('./model/GetVariationsRequest'), require('./model/GetVariationsResource'), require('./model/GetVariationsResponse'), require('./model/ImageSize'), require('./model/ImageType'), require('./model/Images'), require('./model/Item'), require('./model/ItemIdType'), require('./model/ItemInfo'), require('./model/ItemsResult'), require('./model/LanguageType'), require('./model/Languages'), require('./model/ManufactureInfo'), require('./model/MaxPrice'), require('./model/Merchant'), require('./model/MinPrice'), require('./model/MinReviewsRating'), require('./model/MinSavingPercent'), require('./model/Money'), require('./model/MultiValuedAttribute'), require('./model/OfferAvailability'), require('./model/OfferAvailabilityV2'), require('./model/OfferCondition'), require('./model/OfferConditionNote'), require('./model/OfferConditionV2'), require('./model/OfferCount'), require('./model/OfferDeliveryInfo'), require('./model/OfferListing'), require('./model/OfferListingV2'), require('./model/OfferListings'), require('./model/OfferListingsV2'), require('./model/OfferLoyaltyPoints'), require('./model/OfferLoyaltyPointsV2'), require('./model/OfferMerchantInfo'), require('./model/OfferMerchantInfoV2'), require('./model/OfferPrice'), require('./model/OfferPriceV2'), require('./model/OfferProgramEligibility'), require('./model/OfferPromotion'), require('./model/OfferSavingBasis'), require('./model/OfferSavings'), require('./model/OfferSavingsV2'), require('./model/OfferShippingCharge'), require('./model/OfferSubCondition'), require('./model/OfferSummary'), require('./model/OfferType'), require('./model/Offers'), require('./model/OffersV2'), require('./model/PartnerType'), require('./model/Price'), require('./model/PriceType'), require('./model/ProductAdvertisingAPIClientException'), require('./model/ProductAdvertisingAPIServiceException'), require('./model/ProductInfo'), require('./model/Properties'), require('./model/Rating'), require('./model/Refinement'), require('./model/RefinementBin'), require('./model/RentalOfferListing'), require('./model/RentalOffers'), require('./model/SavingBasisType'), require('./model/SearchIndex'), require('./model/SearchItemsRequest'), require('./model/SearchItemsResource'), require('./model/SearchItemsResponse'), require('./model/SearchRefinements'), require('./model/SearchResult'), require('./model/SingleBooleanValuedAttribute'), require('./model/SingleIntegerValuedAttribute'), require('./model/SingleStringValuedAttribute'), require('./model/SortBy'), require('./model/TechnicalInfo'), require('./model/TradeInInfo'), require('./model/TradeInPrice'), require('./model/UnitBasedAttribute'), require('./model/VariationAttribute'), require('./model/VariationDimension'), require('./model/VariationSummary'), require('./model/VariationsResult'), require('./model/WebsiteSalesRank'), require('./api/DefaultApi'));
-  }
-}(function(ApiClient, Availability, BigDecimal, BrowseNode, BrowseNodeAncestor, BrowseNodeChild, BrowseNodeInfo, BrowseNodesResult, ByLineInfo, Classifications, Condition, ContentInfo, ContentRating, Contributor, CustomerReviews, DealDetails, DeliveryFlag, DimensionBasedAttribute, DurationPrice, ErrorData, ExternalIds, GetBrowseNodesRequest, GetBrowseNodesResource, GetBrowseNodesResponse, GetItemsRequest, GetItemsResource, GetItemsResponse, GetVariationsRequest, GetVariationsResource, GetVariationsResponse, ImageSize, ImageType, Images, Item, ItemIdType, ItemInfo, ItemsResult, LanguageType, Languages, ManufactureInfo, MaxPrice, Merchant, MinPrice, MinReviewsRating, MinSavingPercent, Money, MultiValuedAttribute, OfferAvailability, OfferAvailabilityV2, OfferCondition, OfferConditionNote, OfferConditionV2, OfferCount, OfferDeliveryInfo, OfferListing, OfferListingV2, OfferListings, OfferListingsV2, OfferLoyaltyPoints, OfferLoyaltyPointsV2, OfferMerchantInfo, OfferMerchantInfoV2, OfferPrice, OfferPriceV2, OfferProgramEligibility, OfferPromotion, OfferSavingBasis, OfferSavings, OfferSavingsV2, OfferShippingCharge, OfferSubCondition, OfferSummary, OfferType, Offers, OffersV2, PartnerType, Price, PriceType, ProductAdvertisingAPIClientException, ProductAdvertisingAPIServiceException, ProductInfo, Properties, Rating, Refinement, RefinementBin, RentalOfferListing, RentalOffers, SavingBasisType, SearchIndex, SearchItemsRequest, SearchItemsResource, SearchItemsResponse, SearchRefinements, SearchResult, SingleBooleanValuedAttribute, SingleIntegerValuedAttribute, SingleStringValuedAttribute, SortBy, TechnicalInfo, TradeInInfo, TradeInPrice, UnitBasedAttribute, VariationAttribute, VariationDimension, VariationSummary, VariationsResult, WebsiteSalesRank, DefaultApi) {
-  'use strict';
+const exports = (() => {
+'use strict';
 
   /**
    * ProductAdvertisingAPI 5.0 NodeJS SDK.<br>
@@ -604,5 +704,8 @@
     DefaultApi: DefaultApi
   };
 
+  
   return exports;
-}));
+})();
+
+export default exports;

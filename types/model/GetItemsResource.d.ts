@@ -69,4 +69,4 @@ declare const GetItemsResource: {
   "OffersV2.Listings.Type": "OffersV2.Listings.Type";
   constructFromObject(object: any): any;
 };
-export = GetItemsResource;
+export default GetItemsResource;

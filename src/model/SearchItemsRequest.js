@@ -18,23 +18,23 @@
  * https://webservices.amazon.com/paapi5/documentation/index.html
  *
  */
+import ApiClient from '../ApiClient.js';
+import Availability from './Availability.js';
+import Condition from './Condition.js';
+import DeliveryFlag from './DeliveryFlag.js';
+import MaxPrice from './MaxPrice.js';
+import Merchant from './Merchant.js';
+import MinPrice from './MinPrice.js';
+import MinReviewsRating from './MinReviewsRating.js';
+import MinSavingPercent from './MinSavingPercent.js';
+import OfferCount from './OfferCount.js';
+import PartnerType from './PartnerType.js';
+import Properties from './Properties.js';
+import SearchItemsResource from './SearchItemsResource.js';
+import SortBy from './SortBy.js';
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/Availability', 'model/Condition', 'model/DeliveryFlag', 'model/MaxPrice', 'model/Merchant', 'model/MinPrice', 'model/MinReviewsRating', 'model/MinSavingPercent', 'model/OfferCount', 'model/PartnerType', 'model/Properties', 'model/SearchItemsResource', 'model/SortBy'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./Availability'), require('./Condition'), require('./DeliveryFlag'), require('./MaxPrice'), require('./Merchant'), require('./MinPrice'), require('./MinReviewsRating'), require('./MinSavingPercent'), require('./OfferCount'), require('./PartnerType'), require('./Properties'), require('./SearchItemsResource'), require('./SortBy'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.ProductAdvertisingAPIv1) {
-      root.ProductAdvertisingAPIv1 = {};
-    }
-    root.ProductAdvertisingAPIv1.SearchItemsRequest = factory(root.ProductAdvertisingAPIv1.ApiClient, root.ProductAdvertisingAPIv1.Availability, root.ProductAdvertisingAPIv1.Condition, root.ProductAdvertisingAPIv1.DeliveryFlag, root.ProductAdvertisingAPIv1.MaxPrice, root.ProductAdvertisingAPIv1.Merchant, root.ProductAdvertisingAPIv1.MinPrice, root.ProductAdvertisingAPIv1.MinReviewsRating, root.ProductAdvertisingAPIv1.MinSavingPercent, root.ProductAdvertisingAPIv1.OfferCount, root.ProductAdvertisingAPIv1.PartnerType, root.ProductAdvertisingAPIv1.Properties, root.ProductAdvertisingAPIv1.SearchItemsResource, root.ProductAdvertisingAPIv1.SortBy);
-  }
-}(this, function(ApiClient, Availability, Condition, DeliveryFlag, MaxPrice, Merchant, MinPrice, MinReviewsRating, MinSavingPercent, OfferCount, PartnerType, Properties, SearchItemsResource, SortBy) {
-  'use strict';
+const exports = (() => {
+'use strict';
 
 
 
@@ -291,7 +291,8 @@
 
 
 
+  
   return exports;
-}));
+})();
 
-
+export default exports;

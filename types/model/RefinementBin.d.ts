@@ -5,4 +5,4 @@ declare class RefinementBin {
   "Id"?: string;
   static constructFromObject(data: any, obj?: RefinementBin): RefinementBin;
 }
-export = RefinementBin;
+export default RefinementBin;

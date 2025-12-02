@@ -18,23 +18,21 @@
  * https://webservices.amazon.com/paapi5/documentation/index.html
  *
  */
+import ApiClient from '../ApiClient.js';
+import ByLineInfo from './ByLineInfo.js';
+import Classifications from './Classifications.js';
+import ContentInfo from './ContentInfo.js';
+import ContentRating from './ContentRating.js';
+import ExternalIds from './ExternalIds.js';
+import ManufactureInfo from './ManufactureInfo.js';
+import MultiValuedAttribute from './MultiValuedAttribute.js';
+import ProductInfo from './ProductInfo.js';
+import SingleStringValuedAttribute from './SingleStringValuedAttribute.js';
+import TechnicalInfo from './TechnicalInfo.js';
+import TradeInInfo from './TradeInInfo.js';
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/ByLineInfo', 'model/Classifications', 'model/ContentInfo', 'model/ContentRating', 'model/ExternalIds', 'model/ManufactureInfo', 'model/MultiValuedAttribute', 'model/ProductInfo', 'model/SingleStringValuedAttribute', 'model/TechnicalInfo', 'model/TradeInInfo'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./ByLineInfo'), require('./Classifications'), require('./ContentInfo'), require('./ContentRating'), require('./ExternalIds'), require('./ManufactureInfo'), require('./MultiValuedAttribute'), require('./ProductInfo'), require('./SingleStringValuedAttribute'), require('./TechnicalInfo'), require('./TradeInInfo'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.ProductAdvertisingAPIv1) {
-      root.ProductAdvertisingAPIv1 = {};
-    }
-    root.ProductAdvertisingAPIv1.ItemInfo = factory(root.ProductAdvertisingAPIv1.ApiClient, root.ProductAdvertisingAPIv1.ByLineInfo, root.ProductAdvertisingAPIv1.Classifications, root.ProductAdvertisingAPIv1.ContentInfo, root.ProductAdvertisingAPIv1.ContentRating, root.ProductAdvertisingAPIv1.ExternalIds, root.ProductAdvertisingAPIv1.ManufactureInfo, root.ProductAdvertisingAPIv1.MultiValuedAttribute, root.ProductAdvertisingAPIv1.ProductInfo, root.ProductAdvertisingAPIv1.SingleStringValuedAttribute, root.ProductAdvertisingAPIv1.TechnicalInfo, root.ProductAdvertisingAPIv1.TradeInInfo);
-  }
-}(this, function(ApiClient, ByLineInfo, Classifications, ContentInfo, ContentRating, ExternalIds, ManufactureInfo, MultiValuedAttribute, ProductInfo, SingleStringValuedAttribute, TechnicalInfo, TradeInInfo) {
-  'use strict';
+const exports = (() => {
+'use strict';
 
 
 
@@ -161,7 +159,8 @@
 
 
 
+  
   return exports;
-}));
+})();
 
-
+export default exports;

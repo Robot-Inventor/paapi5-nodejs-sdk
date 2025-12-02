@@ -7,4 +7,4 @@ declare class Contributor {
   "RoleType"?: string;
   static constructFromObject(data: any, obj?: Contributor): Contributor;
 }
-export = Contributor;
+export default Contributor;

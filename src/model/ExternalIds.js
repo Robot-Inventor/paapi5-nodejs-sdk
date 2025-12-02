@@ -18,23 +18,11 @@
  * https://webservices.amazon.com/paapi5/documentation/index.html
  *
  */
+import ApiClient from '../ApiClient.js';
+import MultiValuedAttribute from './MultiValuedAttribute.js';
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/MultiValuedAttribute'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./MultiValuedAttribute'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.ProductAdvertisingAPIv1) {
-      root.ProductAdvertisingAPIv1 = {};
-    }
-    root.ProductAdvertisingAPIv1.ExternalIds = factory(root.ProductAdvertisingAPIv1.ApiClient, root.ProductAdvertisingAPIv1.MultiValuedAttribute);
-  }
-}(this, function(ApiClient, MultiValuedAttribute) {
-  'use strict';
+const exports = (() => {
+'use strict';
 
 
 
@@ -97,7 +85,8 @@
 
 
 
+  
   return exports;
-}));
+})();
 
-
+export default exports;

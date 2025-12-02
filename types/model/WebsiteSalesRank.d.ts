@@ -7,4 +7,4 @@ declare class WebsiteSalesRank {
   "SalesRank"?: number;
   static constructFromObject(data: any, obj?: WebsiteSalesRank): WebsiteSalesRank;
 }
-export = WebsiteSalesRank;
+export default WebsiteSalesRank;

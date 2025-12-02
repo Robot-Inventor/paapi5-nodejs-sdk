@@ -6,4 +6,4 @@ declare class SingleBooleanValuedAttribute {
   "Locale"?: string;
   static constructFromObject(data: any, obj?: SingleBooleanValuedAttribute): SingleBooleanValuedAttribute;
 }
-export = SingleBooleanValuedAttribute;
+export default SingleBooleanValuedAttribute;

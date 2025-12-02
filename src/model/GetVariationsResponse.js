@@ -18,23 +18,12 @@
  * https://webservices.amazon.com/paapi5/documentation/index.html
  *
  */
+import ApiClient from '../ApiClient.js';
+import ErrorData from './ErrorData.js';
+import VariationsResult from './VariationsResult.js';
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/ErrorData', 'model/VariationsResult'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./ErrorData'), require('./VariationsResult'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.ProductAdvertisingAPIv1) {
-      root.ProductAdvertisingAPIv1 = {};
-    }
-    root.ProductAdvertisingAPIv1.GetVariationsResponse = factory(root.ProductAdvertisingAPIv1.ApiClient, root.ProductAdvertisingAPIv1.ErrorData, root.ProductAdvertisingAPIv1.VariationsResult);
-  }
-}(this, function(ApiClient, ErrorData, VariationsResult) {
-  'use strict';
+const exports = (() => {
+'use strict';
 
 
 
@@ -89,7 +78,8 @@
 
 
 
+  
   return exports;
-}));
+})();
 
-
+export default exports;

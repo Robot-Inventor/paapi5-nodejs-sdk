@@ -6,4 +6,4 @@ declare class TradeInPrice {
   "DisplayAmount"?: string;
   static constructFromObject(data: any, obj?: TradeInPrice): TradeInPrice;
 }
-export = TradeInPrice;
+export default TradeInPrice;

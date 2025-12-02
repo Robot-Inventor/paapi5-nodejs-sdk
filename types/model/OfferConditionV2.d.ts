@@ -6,4 +6,4 @@ declare class OfferConditionV2 {
   "ConditionNote"?: string;
   static constructFromObject(data: any, obj?: OfferConditionV2): OfferConditionV2;
 }
-export = OfferConditionV2;
+export default OfferConditionV2;

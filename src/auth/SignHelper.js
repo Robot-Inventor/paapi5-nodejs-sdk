@@ -1,3 +1,6 @@
+import crypto from 'crypto-js';
+
+const exports = {};
 /**
  * Copyright 2024 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -43,8 +46,6 @@
 
 // sources of inspiration:
 // http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
-
-var crypto = require('crypto-js');
 
 exports.createAuthorizationHeader = function(
   accessKey,
@@ -178,3 +179,6 @@ function hmac(key, data) {
 function hexEncodedHash(data) {
   return crypto.SHA256(data).toString(crypto.enc.Hex);
 }
+
+
+export default exports;

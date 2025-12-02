@@ -8,4 +8,4 @@ declare class OfferMerchantInfo {
   "Name"?: string;
   static constructFromObject(data: any, obj?: OfferMerchantInfo): OfferMerchantInfo;
 }
-export = OfferMerchantInfo;
+export default OfferMerchantInfo;

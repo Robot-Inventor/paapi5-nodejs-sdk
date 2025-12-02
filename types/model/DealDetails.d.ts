@@ -9,4 +9,4 @@ declare class DealDetails {
   "StartTime"?: string;
   static constructFromObject(data: any, obj?: DealDetails): DealDetails;
 }
-export = DealDetails;
+export default DealDetails;

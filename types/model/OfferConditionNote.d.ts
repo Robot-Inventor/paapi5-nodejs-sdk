@@ -5,4 +5,4 @@ declare class OfferConditionNote {
   "Value"?: string;
   static constructFromObject(data: any, obj?: OfferConditionNote): OfferConditionNote;
 }
-export = OfferConditionNote;
+export default OfferConditionNote;

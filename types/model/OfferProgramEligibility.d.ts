@@ -5,4 +5,4 @@ declare class OfferProgramEligibility {
   "IsPrimePantry"?: boolean;
   static constructFromObject(data: any, obj?: OfferProgramEligibility): OfferProgramEligibility;
 }
-export = OfferProgramEligibility;
+export default OfferProgramEligibility;

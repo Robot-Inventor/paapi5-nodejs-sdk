@@ -6,4 +6,4 @@ declare const DeliveryFlag: {
   "Prime": "Prime";
   constructFromObject(object: any): any;
 };
-export = DeliveryFlag;
+export default DeliveryFlag;

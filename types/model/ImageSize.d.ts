@@ -6,4 +6,4 @@ declare class ImageSize {
   "Width"?: number;
   static constructFromObject(data: any, obj?: ImageSize): ImageSize;
 }
-export = ImageSize;
+export default ImageSize;

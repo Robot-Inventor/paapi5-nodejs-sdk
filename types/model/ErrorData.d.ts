@@ -5,4 +5,4 @@ declare class ErrorData {
   "Message"?: string;
   static constructFromObject(data: any, obj?: ErrorData): ErrorData;
 }
-export = ErrorData;
+export default ErrorData;

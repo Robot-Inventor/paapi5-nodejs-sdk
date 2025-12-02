@@ -8,4 +8,4 @@ declare class OfferSavings {
   "PricePerUnit"?: number;
   static constructFromObject(data: any, obj?: OfferSavings): OfferSavings;
 }
-export = OfferSavings;
+export default OfferSavings;

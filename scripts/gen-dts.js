@@ -1,36 +1,35 @@
+import fs from "fs";
+import path from "path";
 
-
-const fs = require('fs');
-const path = require('path');
-
-const SRC_DIR = path.resolve(process.cwd(), 'src');
-const OUT_DIR = path.resolve(process.cwd(), 'types');
+const SRC_DIR = path.resolve(process.cwd(), "src");
+const OUT_DIR = path.resolve(process.cwd(), "types");
 
 function ensureDir(p) {
   fs.mkdirSync(p, { recursive: true });
 }
 
 function read(file) {
-  return fs.readFileSync(file, 'utf8');
+  return fs.readFileSync(file, "utf8");
 }
 
 function write(file, content) {
   ensureDir(path.dirname(file));
-  fs.writeFileSync(file, content.replace(/\r?\n/g, '\n'));
+  fs.writeFileSync(file, content.replace(/\r?\n/g, "\n"));
 }
 
 function mapJsDocTypeToTs(rawType, currentFolder) {
-  const t = (rawType || '').trim();
-  const mapPrim = (x) => ({
-    'String': 'string',
-    'Number': 'number',
-    'Integer': 'number',
-    'Boolean': 'boolean',
-    'Date': 'Date',
-    'Object': 'any',
-    'Blob': 'any',
-    'Array': 'any[]'
-  })[x] || null;
+  const t = (rawType || "").trim();
+  const mapPrim = (x) =>
+    ({
+      String: "string",
+      Number: "number",
+      Integer: "number",
+      Boolean: "boolean",
+      Date: "Date",
+      Object: "any",
+      Blob: "any",
+      Array: "any[]",
+    }[x] || null);
 
   // Array.<...>
   let m = t.match(/^Array\.<(.+)>$/);
@@ -43,41 +42,46 @@ function mapJsDocTypeToTs(rawType, currentFolder) {
   m = t.match(/^module:(model|api)\/(.+)$/) || t.match(/^module:(ApiClient)$/);
   if (m) {
     let rel;
-    if (m[1] === 'ApiClient') {
-      rel = path.relative(currentFolder, path.join(OUT_DIR, 'ApiClient')).replace(/\\/g, '/');
+    if (m[1] === "ApiClient") {
+      rel = path
+        .relative(currentFolder, path.join(OUT_DIR, "ApiClient"))
+        .replace(/\\/g, "/");
     } else {
-      rel = path.relative(currentFolder, path.join(OUT_DIR, m[1], m[2])).replace(/\\/g, '/');
+      rel = path
+        .relative(currentFolder, path.join(OUT_DIR, m[1], m[2]))
+        .replace(/\\/g, "/");
     }
-    if (!rel.startsWith('.')) rel = './' + rel;
+    if (!rel.startsWith(".")) rel = "./" + rel;
     // For models (classes) we want instance type. For enums/objects, value union. We cannot easily know here,
     // so return a flexible type that works for both: for classes, InstanceType<...>, for enums just the value type.
     // Callers (property emitters) decide how to wrap.
-    return `typeof import("${rel}")`;
+    return `typeof import("${rel}").default`;
   }
 
   const prim = mapPrim(t);
   if (prim) return prim;
 
   // Fallback to any
-  return 'any';
+  return "any";
 }
 
 function parseEnumValues(src) {
   const values = new Set();
   // Capture lines like "Key": "Value" or Key: 'Value'
-  const enumBlockStart = src.indexOf('var exports = {');
+  const enumBlockStart = src.indexOf("var exports = {");
   if (enumBlockStart !== -1) {
     const after = src.slice(enumBlockStart);
-    const end = after.indexOf('};');
+    const end = after.indexOf("};");
     const block = after.slice(0, end);
-    const re = /\n\s*(?:"([^"]+)"|'([^']+)'|([A-Za-z0-9_\.]+))\s*:\s*(?:"([^"]+)"|'([^']+)'|([A-Za-z0-9_\.]+))\s*,?/g;
+    const re =
+      /\n\s*(?:"([^"]+)"|'([^']+)'|([A-Za-z0-9_\.]+))\s*:\s*(?:"([^"]+)"|'([^']+)'|([A-Za-z0-9_\.]+))\s*,?/g;
     let m;
     while ((m = re.exec(block))) {
       const key = m[1] || m[2] || m[3];
       const val = m[4] || m[5] || m[6];
       if (!key) continue;
       // Only keep entries where value is present (skip comments, trailing braces)
-      if (typeof val === 'string') {
+      if (typeof val === "string") {
         values.add(val);
       }
     }
@@ -88,13 +92,18 @@ function parseEnumValues(src) {
 function generateEnumDts(name, srcPath, outPath) {
   const src = read(srcPath);
   const values = parseEnumValues(src);
-  const props = values.map(v => `  ${JSON.stringify(v)}: ${JSON.stringify(v)};`).join('\n');
-  const content = `// Auto-generated from ${path.relative(process.cwd(), srcPath)}
+  const props = values
+    .map((v) => `  ${JSON.stringify(v)}: ${JSON.stringify(v)};`)
+    .join("\n");
+  const content = `// Auto-generated from ${path.relative(
+    process.cwd(),
+    srcPath
+  )}
 declare const ${name}: {
 ${props}
   constructFromObject(object: any): any;
 };
-export = ${name};
+export default ${name};
 `;
   write(outPath, content);
 }
@@ -102,13 +111,14 @@ export = ${name};
 function parseMembers(src) {
   // Find all JSDoc @member {Type} Name blocks
   const members = [];
-  const re = /\*\*\s*\n(?:[^*]|\*(?!\/))*?@member\s+\{([^}]+)\}\s+([A-Za-z0-9_\[\]"']+)\s*[\s\S]*?\*\/[\s\r\n]*exports\.prototype\[([^\]]+)\]\s*=\s*undefined;/g;
+  const re =
+    /\*\*\s*\n(?:[^*]|\*(?!\/))*?@member\s+\{([^}]+)\}\s+([A-Za-z0-9_\[\]"']+)\s*[\s\S]*?\*\/[\s\r\n]*exports\.prototype\[([^\]]+)\]\s*=\s*undefined;/g;
   let m;
   while ((m = re.exec(src))) {
     const rawType = m[1].trim();
     let name = m[2].trim();
     // Normalize name from quotes or brackets
-    name = name.replace(/^['"]|['"]$/g, '');
+    name = name.replace(/^['"]|['"]$/g, "");
     members.push({ name, rawType });
   }
   return members;
@@ -117,18 +127,19 @@ function parseMembers(src) {
 function parseConstructorParams(src, className) {
   const params = [];
   // Support both "@param {Type} name" and "@param name {Type}"
-  const re = /@param\s+(?:\{([^}]+)\}\s*([A-Za-z0-9_]+)|([A-Za-z0-9_]+)\s*\{([^}]+)\})/g;
+  const re =
+    /@param\s+(?:\{([^}]+)\}\s*([A-Za-z0-9_]+)|([A-Za-z0-9_]+)\s*\{([^}]+)\})/g;
   let m;
   // Narrow strictly to the constructor JSDoc block: "Constructs a new <code>ClassName</code>"
   const marker = `Constructs a new <code>${className}</code>`;
   const start = src.indexOf(marker);
   if (start === -1) return params;
   const after = src.slice(start);
-  const endBlock = after.indexOf('*/');
+  const endBlock = after.indexOf("*/");
   const section = endBlock !== -1 ? after.slice(0, endBlock) : after;
   while ((m = re.exec(section))) {
-    const type = (m[1] || m[4] || '').trim();
-    const name = (m[2] || m[3] || '').trim();
+    const type = (m[1] || m[4] || "").trim();
+    const name = (m[2] || m[3] || "").trim();
     if (name) params.push({ name, rawType: type });
   }
   return params;
@@ -142,9 +153,11 @@ function generateModelDts(name, srcPath, outPath, enumNames) {
 
   // Detect array-like models (runtime extends Array) and infer element type
   const isArrayModel = /@extends\s+Array/.test(src);
-  let arrayElementTs = 'any';
+  let arrayElementTs = "any";
   if (isArrayModel) {
-    const m = src.match(/constructFromObject\(data, obj, ['"]([A-Za-z0-9_]+)['"]\)/);
+    const m = src.match(
+      /constructFromObject\(data, obj, ['"]([A-Za-z0-9_]+)['"]\)/
+    );
     if (m) {
       const refName = m[1];
       const modTs = mapJsDocTypeToTs(`module:model/${refName}`, currentFolder);
@@ -154,59 +167,65 @@ function generateModelDts(name, srcPath, outPath, enumNames) {
         arrayElementTs = `InstanceType<${modTs}>`;
       }
     } else {
-      arrayElementTs = 'any';
+      arrayElementTs = "any";
     }
   }
 
-  const fields = members.map(({ name, rawType }) => {
-    let tsType;
-    if (/^module:/.test(rawType)) {
-      const modTs = mapJsDocTypeToTs(rawType, currentFolder);
-      if (/module:model\//.test(rawType)) {
-        const refName = rawType.replace(/^module:model\//, '').trim();
-        if (enumNames.has(refName)) {
-          tsType = `${modTs}[keyof ${modTs}]`;
-        } else {
-          tsType = `InstanceType<${modTs}>`;
-        }
-      } else {
-        tsType = modTs;
-      }
-    } else if (/^Array\.</.test(rawType)) {
-      // Recursively map
-      const inner = rawType.replace(/^Array\.</, '').replace(/>$/, '');
-      if (/^module:/.test(inner)) {
-        const modTs = mapJsDocTypeToTs(inner, currentFolder);
-        if (/module:model\//.test(inner)) {
-          const refName = inner.replace(/^module:model\//, '').trim();
+  const fields = members
+    .map(({ name, rawType }) => {
+      let tsType;
+      if (/^module:/.test(rawType)) {
+        const modTs = mapJsDocTypeToTs(rawType, currentFolder);
+        if (/module:model\//.test(rawType)) {
+          const refName = rawType.replace(/^module:model\//, "").trim();
           if (enumNames.has(refName)) {
-            tsType = `Array<${modTs}[keyof ${modTs}]>`;
+            tsType = `${modTs}[keyof ${modTs}]`;
           } else {
-            tsType = `Array<InstanceType<${modTs}>>`;
+            tsType = `InstanceType<${modTs}>`;
           }
         } else {
-          tsType = `Array<${modTs}>`;
+          tsType = modTs;
+        }
+      } else if (/^Array\.</.test(rawType)) {
+        // Recursively map
+        const inner = rawType.replace(/^Array\.</, "").replace(/>$/, "");
+        if (/^module:/.test(inner)) {
+          const modTs = mapJsDocTypeToTs(inner, currentFolder);
+          if (/module:model\//.test(inner)) {
+            const refName = inner.replace(/^module:model\//, "").trim();
+            if (enumNames.has(refName)) {
+              tsType = `Array<${modTs}[keyof ${modTs}]>`;
+            } else {
+              tsType = `Array<InstanceType<${modTs}>>`;
+            }
+          } else {
+            tsType = `Array<${modTs}>`;
+          }
+        } else {
+          tsType = mapJsDocTypeToTs(rawType, currentFolder);
         }
       } else {
         tsType = mapJsDocTypeToTs(rawType, currentFolder);
       }
-    } else {
-      tsType = mapJsDocTypeToTs(rawType, currentFolder);
-    }
-    return `  ${JSON.stringify(name)}?: ${tsType};`;
-  }).join('\n');
+      return `  ${JSON.stringify(name)}?: ${tsType};`;
+    })
+    .join("\n");
 
   const ctorSig = (() => {
-    if (!ctorParams.length) return '  constructor();\n';
-    const parts = ctorParams.map(p => {
-      const ts = mapJsDocTypeToTs(p.rawType, currentFolder);
-      let finalTs = ts;
-      if (/module:model\//.test(p.rawType)) {
-        const refName = p.rawType.replace(/^module:model\//, '').trim();
-        finalTs = enumNames.has(refName) ? `${ts}[keyof ${ts}]` : `InstanceType<${ts}>`;
-      }
-      return `${p.name}: ${finalTs}`;
-    }).join(', ');
+    if (!ctorParams.length) return "  constructor();\n";
+    const parts = ctorParams
+      .map((p) => {
+        const ts = mapJsDocTypeToTs(p.rawType, currentFolder);
+        let finalTs = ts;
+        if (/module:model\//.test(p.rawType)) {
+          const refName = p.rawType.replace(/^module:model\//, "").trim();
+          finalTs = enumNames.has(refName)
+            ? `${ts}[keyof ${ts}]`
+            : `InstanceType<${ts}>`;
+        }
+        return `${p.name}: ${finalTs}`;
+      })
+      .join(", ");
     return `  constructor(${parts});\n`;
   })();
 
@@ -214,10 +233,15 @@ function generateModelDts(name, srcPath, outPath, enumNames) {
     ? `declare class ${name} extends Array<${arrayElementTs}> {\n`
     : `declare class ${name} {\n`;
 
-  const content = `// Auto-generated from ${path.relative(process.cwd(), srcPath)}
-${classHeader}${ctorSig}${fields ? fields + '\n' : ''}  static constructFromObject(data: any, obj?: ${name}): ${name};
+  const content = `// Auto-generated from ${path.relative(
+    process.cwd(),
+    srcPath
+  )}
+${classHeader}${ctorSig}${
+    fields ? fields + "\n" : ""
+  }  static constructFromObject(data: any, obj?: ${name}): ${name};
 }
-export = ${name};
+export default ${name};
 `;
   write(outPath, content);
 }
@@ -272,7 +296,7 @@ declare class ApiClient {
   static constructFromObject(data: any, obj: any, itemType: any): void;
   static instance: ApiClient;
 }
-export = ApiClient;
+export default ApiClient;
 `;
   write(outPath, content);
 }
@@ -280,41 +304,41 @@ export = ApiClient;
 function generateDefaultApiDts(outPath) {
   const content = `// Auto-generated typings for DefaultApi
 declare class DefaultApi {
-  constructor(apiClient?: import('../ApiClient'));
+  constructor(apiClient?: import('../ApiClient').default);
 
   getBrowseNodesWithHttpInfo(
-    getBrowseNodesRequest: InstanceType<typeof import('../model/GetBrowseNodesRequest')>
-  ): Promise<{ data: InstanceType<typeof import('../model/GetBrowseNodesResponse')>; response: any }>;
+    getBrowseNodesRequest: InstanceType<typeof import('../model/GetBrowseNodesRequest').default>
+  ): Promise<{ data: InstanceType<typeof import('../model/GetBrowseNodesResponse').default>; response: any }>;
 
   getBrowseNodes(
-    getBrowseNodesRequest: InstanceType<typeof import('../model/GetBrowseNodesRequest')>
-  ): Promise<InstanceType<typeof import('../model/GetBrowseNodesResponse')>>;
+    getBrowseNodesRequest: InstanceType<typeof import('../model/GetBrowseNodesRequest').default>
+  ): Promise<InstanceType<typeof import('../model/GetBrowseNodesResponse').default>>;
 
   getItemsWithHttpInfo(
-    getItemsRequest: InstanceType<typeof import('../model/GetItemsRequest')>
-  ): Promise<{ data: InstanceType<typeof import('../model/GetItemsResponse')>; response: any }>;
+    getItemsRequest: InstanceType<typeof import('../model/GetItemsRequest').default>
+  ): Promise<{ data: InstanceType<typeof import('../model/GetItemsResponse').default>; response: any }>;
 
   getItems(
-    getItemsRequest: InstanceType<typeof import('../model/GetItemsRequest')>
-  ): Promise<InstanceType<typeof import('../model/GetItemsResponse')>>;
+    getItemsRequest: InstanceType<typeof import('../model/GetItemsRequest').default>
+  ): Promise<InstanceType<typeof import('../model/GetItemsResponse').default>>;
 
   getVariationsWithHttpInfo(
-    getVariationsRequest: InstanceType<typeof import('../model/GetVariationsRequest')>
-  ): Promise<{ data: InstanceType<typeof import('../model/GetVariationsResponse')>; response: any }>;
+    getVariationsRequest: InstanceType<typeof import('../model/GetVariationsRequest').default>
+  ): Promise<{ data: InstanceType<typeof import('../model/GetVariationsResponse').default>; response: any }>;
 
   getVariations(
-    getVariationsRequest: InstanceType<typeof import('../model/GetVariationsRequest')>
-  ): Promise<InstanceType<typeof import('../model/GetVariationsResponse')>>;
+    getVariationsRequest: InstanceType<typeof import('../model/GetVariationsRequest').default>
+  ): Promise<InstanceType<typeof import('../model/GetVariationsResponse').default>>;
 
   searchItemsWithHttpInfo(
-    searchItemsRequest: InstanceType<typeof import('../model/SearchItemsRequest')>
-  ): Promise<{ data: InstanceType<typeof import('../model/SearchItemsResponse')>; response: any }>;
+    searchItemsRequest: InstanceType<typeof import('../model/SearchItemsRequest').default>
+  ): Promise<{ data: InstanceType<typeof import('../model/SearchItemsResponse').default>; response: any }>;
 
   searchItems(
-    searchItemsRequest: InstanceType<typeof import('../model/SearchItemsRequest')>
-  ): Promise<InstanceType<typeof import('../model/SearchItemsResponse')>>;
+    searchItemsRequest: InstanceType<typeof import('../model/SearchItemsRequest').default>
+  ): Promise<InstanceType<typeof import('../model/SearchItemsResponse').default>>;
 }
-export = DefaultApi;
+export default DefaultApi;
 `;
   write(outPath, content);
 }
@@ -362,7 +386,7 @@ declare const SignHelper: {
   ): string;
   toAmzDate(time: number | string | Date): string;
 };
-export = SignHelper;
+export default SignHelper;
 `;
   write(outPath, content);
 }
@@ -370,12 +394,13 @@ export = SignHelper;
 function parseIndexExports(src) {
   // Parse object literal defining the exported surface in index.js
   const out = [];
-  const start = src.indexOf('var exports = {');
+  const start = src.indexOf("var exports = {");
   if (start === -1) return out;
   const after = src.slice(start);
-  const end = after.indexOf('};');
+  const end = after.indexOf("};");
   const block = after.slice(0, end);
-  const re = /\n\s*\/\*\*[\s\S]*?\*\/\s*([A-Za-z0-9_]+)\s*:\s*([A-Za-z0-9_]+)\s*,?/g;
+  const re =
+    /\n\s*\/\*\*[\s\S]*?\*\/\s*([A-Za-z0-9_]+)\s*:\s*([A-Za-z0-9_]+)\s*,?/g;
   let m;
   while ((m = re.exec(block))) {
     out.push({ exportedName: m[1], localName: m[2] });
@@ -388,16 +413,16 @@ function generateIndexDts(srcPath, outPath) {
   const entries = parseIndexExports(src);
   const lines = entries.map(({ exportedName }) => {
     let rel;
-    if (exportedName === 'ApiClient') rel = './ApiClient';
-    else if (exportedName === 'DefaultApi') rel = './api/DefaultApi';
+    if (exportedName === "ApiClient") rel = "./ApiClient";
+    else if (exportedName === "DefaultApi") rel = "./api/DefaultApi";
     else rel = `./model/${exportedName}`;
-    return `  ${exportedName}: typeof import(${JSON.stringify(rel)});`;
+    return `  ${exportedName}: typeof import(${JSON.stringify(rel)}).default;`;
   });
   const content = `// Auto-generated typings for index.js aggregate
 declare const ProductAdvertisingAPIv1: {
-${lines.join('\n')}
+${lines.join("\n")}
 };
-export = ProductAdvertisingAPIv1;
+export default ProductAdvertisingAPIv1;
 `;
   write(outPath, content);
 }
@@ -406,35 +431,52 @@ function main() {
   ensureDir(OUT_DIR);
 
   // Generate ApiClient
-  generateApiClientDts(path.join(OUT_DIR, 'ApiClient.d.ts'));
+  generateApiClientDts(path.join(OUT_DIR, "ApiClient.d.ts"));
 
   // Generate DefaultApi
-  generateDefaultApiDts(path.join(OUT_DIR, 'api', 'DefaultApi.d.ts'));
+  generateDefaultApiDts(path.join(OUT_DIR, "api", "DefaultApi.d.ts"));
 
   // Generate SignHelper
-  generateSignHelperDts(path.join(OUT_DIR, 'auth', 'SignHelper.d.ts'));
+  generateSignHelperDts(path.join(OUT_DIR, "auth", "SignHelper.d.ts"));
 
   // Scan models for enum vs class
-  const modelDir = path.join(SRC_DIR, 'model');
-  const files = fs.readdirSync(modelDir).filter(f => f.endsWith('.js'));
-  const enumNames = new Set(files
-    .map(f => ({ name: path.basename(f, '.js'), code: read(path.join(modelDir, f)) }))
-    .filter(x => x.code.includes('@enum'))
-    .map(x => x.name));
+  const modelDir = path.join(SRC_DIR, "model");
+  const files = fs.readdirSync(modelDir).filter((f) => f.endsWith(".js"));
+  const enumNames = new Set(
+    files
+      .map((f) => ({
+        name: path.basename(f, ".js"),
+        code: read(path.join(modelDir, f)),
+      }))
+      .filter((x) => x.code.includes("@enum"))
+      .map((x) => x.name)
+  );
   for (const f of files) {
-    const name = path.basename(f, '.js');
+    const name = path.basename(f, ".js");
     const srcPath = path.join(modelDir, f);
     const code = read(srcPath);
-    const isEnum = code.includes('@enum');
+    const isEnum = code.includes("@enum");
     if (isEnum) {
-      generateEnumDts(name, srcPath, path.join(OUT_DIR, 'model', `${name}.d.ts`));
+      generateEnumDts(
+        name,
+        srcPath,
+        path.join(OUT_DIR, "model", `${name}.d.ts`)
+      );
     } else {
-      generateModelDts(name, srcPath, path.join(OUT_DIR, 'model', `${name}.d.ts`), enumNames);
+      generateModelDts(
+        name,
+        srcPath,
+        path.join(OUT_DIR, "model", `${name}.d.ts`),
+        enumNames
+      );
     }
   }
 
   // Index aggregate
-  generateIndexDts(path.join(SRC_DIR, 'index.js'), path.join(OUT_DIR, 'index.d.ts'));
+  generateIndexDts(
+    path.join(SRC_DIR, "index.js"),
+    path.join(OUT_DIR, "index.d.ts")
+  );
 
   // Done
 }
