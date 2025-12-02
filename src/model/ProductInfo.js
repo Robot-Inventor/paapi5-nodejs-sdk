@@ -18,23 +18,14 @@
  * https://webservices.amazon.com/paapi5/documentation/index.html
  *
  */
+import ApiClient from '../ApiClient.js';
+import DimensionBasedAttribute from './DimensionBasedAttribute.js';
+import SingleBooleanValuedAttribute from './SingleBooleanValuedAttribute.js';
+import SingleIntegerValuedAttribute from './SingleIntegerValuedAttribute.js';
+import SingleStringValuedAttribute from './SingleStringValuedAttribute.js';
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/DimensionBasedAttribute', 'model/SingleBooleanValuedAttribute', 'model/SingleIntegerValuedAttribute', 'model/SingleStringValuedAttribute'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./DimensionBasedAttribute'), require('./SingleBooleanValuedAttribute'), require('./SingleIntegerValuedAttribute'), require('./SingleStringValuedAttribute'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.ProductAdvertisingAPIv1) {
-      root.ProductAdvertisingAPIv1 = {};
-    }
-    root.ProductAdvertisingAPIv1.ProductInfo = factory(root.ProductAdvertisingAPIv1.ApiClient, root.ProductAdvertisingAPIv1.DimensionBasedAttribute, root.ProductAdvertisingAPIv1.SingleBooleanValuedAttribute, root.ProductAdvertisingAPIv1.SingleIntegerValuedAttribute, root.ProductAdvertisingAPIv1.SingleStringValuedAttribute);
-  }
-}(this, function(ApiClient, DimensionBasedAttribute, SingleBooleanValuedAttribute, SingleIntegerValuedAttribute, SingleStringValuedAttribute) {
-  'use strict';
+const exports = (() => {
+'use strict';
 
 
 
@@ -121,7 +112,8 @@
 
 
 
+  
   return exports;
-}));
+})();
 
-
+export default exports;

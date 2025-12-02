@@ -18,23 +18,12 @@
  * https://webservices.amazon.com/paapi5/documentation/index.html
  *
  */
+import ApiClient from '../ApiClient.js';
+import OfferSavings from './OfferSavings.js';
+import PriceType from './PriceType.js';
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/OfferSavings', 'model/PriceType'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./OfferSavings'), require('./PriceType'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.ProductAdvertisingAPIv1) {
-      root.ProductAdvertisingAPIv1 = {};
-    }
-    root.ProductAdvertisingAPIv1.OfferPrice = factory(root.ProductAdvertisingAPIv1.ApiClient, root.ProductAdvertisingAPIv1.OfferSavings, root.ProductAdvertisingAPIv1.PriceType);
-  }
-}(this, function(ApiClient, OfferSavings, PriceType) {
-  'use strict';
+const exports = (() => {
+'use strict';
 
 
 
@@ -129,7 +118,8 @@
 
 
 
+  
   return exports;
-}));
+})();
 
-
+export default exports;

@@ -13,37 +13,26 @@
  * permissions and limitations under the License.
  */
 
- /**
+/**
  * Copyright 2024 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  */
 
-
- /**
+/**
  * ProductAdvertisingAPI
  * https://webservices.amazon.com/paapi5/documentation/index.html
  *
  */
+import { createRequire } from "node:module";
+import awsv4 from "./auth/SignHelper.js";
+import superagent from "superagent";
+import querystring from "querystring";
 
-var awsv4 = require('./auth/SignHelper');
+const require = createRequire(import.meta.url);
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['superagent', 'querystring'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('superagent'), require('querystring'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.ProductAdvertisingAPIv1) {
-      root.ProductAdvertisingAPIv1 = {};
-    }
-    root.ProductAdvertisingAPIv1.ApiClient = factory(root.superagent, root.querystring);
-  }
-}(this, function(superagent, querystring) {
-  'use strict';
+const exports = (() => {
+  "use strict";
 
   /**
    * @module ApiClient
@@ -57,15 +46,15 @@ var awsv4 = require('./auth/SignHelper');
    * @alias module:ApiClient
    * @class
    */
-  var exports = function() {
+  var exports = function () {
     /**
      * The base URL against which to resolve every API call's (relative) path.
      * @type {String}
      * @default https://webservices.amazon.com
      */
-    this.basePath = 'https://webservices.amazon.com'.replace(/\/+$/, '');
+    this.basePath = "https://webservices.amazon.com".replace(/\/+$/, "");
 
-        /**
+    /**
      * The Access Key ID which uniquely identifies you.
      * @type {String}
      */
@@ -83,21 +72,20 @@ var awsv4 = require('./auth/SignHelper');
      * @type {String}
      * @default webservices.amazon.com
      */
-    this.host = 'webservices.amazon.com';
+    this.host = "webservices.amazon.com";
 
     /**
      * The service's region where the request is targeted.
      * @type {String}
      * @default us-east-1
      */
-    this.region = 'us-east-1';
+    this.region = "us-east-1";
 
     /**
      * The authentication methods to be included for all API calls.
      * @type {Array.<String>}
      */
-    this.authentications = {
-    };
+    this.authentications = {};
     /**
      * The default HTTP headers to be included for all API calls.
      * @type {Array.<String>}
@@ -131,7 +119,7 @@ var awsv4 = require('./auth/SignHelper');
      * Used to save and return cookies in a node.js (non-browser) setting,
      * if this.enableCookies is set to true.
      */
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       this.agent = new superagent.agent();
     }
 
@@ -139,7 +127,7 @@ var awsv4 = require('./auth/SignHelper');
      * Allow user to override superagent agent
      */
     this.requestAgent = {
-      'User-Agent': 'paapi5-nodejs-sdk/1.2.1'
+      "User-Agent": "paapi5-nodejs-sdk/1.2.1",
     };
   };
 
@@ -148,9 +136,9 @@ var awsv4 = require('./auth/SignHelper');
    * @param param The actual parameter.
    * @returns {String} The string representation of <code>param</code>.
    */
-  exports.prototype.paramToString = function(param) {
+  exports.prototype.paramToString = function (param) {
     if (param == undefined || param == null) {
-      return '';
+      return "";
     }
     if (param instanceof Date) {
       return param.toJSON();
@@ -165,13 +153,13 @@ var awsv4 = require('./auth/SignHelper');
    * @param {Object} pathParams The parameter values to append.
    * @returns {String} The encoded path with parameter values substituted.
    */
-  exports.prototype.buildUrl = function(path, pathParams) {
+  exports.prototype.buildUrl = function (path, pathParams) {
     if (!path.match(/^\//)) {
-      path = '/' + path;
+      path = "/" + path;
     }
     var url = "https://" + this.host + path;
     var _this = this;
-    url = url.replace(/\{([\w-]+)\}/g, function(fullMatch, key) {
+    url = url.replace(/\{([\w-]+)\}/g, function (fullMatch, key) {
       var value;
       if (pathParams.hasOwnProperty(key)) {
         value = _this.paramToString(pathParams[key]);
@@ -194,8 +182,10 @@ var awsv4 = require('./auth/SignHelper');
    * @param {String} contentType The MIME content type to check.
    * @returns {Boolean} <code>true</code> if <code>contentType</code> represents JSON, otherwise <code>false</code>.
    */
-  exports.prototype.isJsonMime = function(contentType) {
-    return Boolean(contentType != null && contentType.match(/^application\/json(;.*)?$/i));
+  exports.prototype.isJsonMime = function (contentType) {
+    return Boolean(
+      contentType != null && contentType.match(/^application\/json(;.*)?$/i)
+    );
   };
 
   /**
@@ -203,7 +193,7 @@ var awsv4 = require('./auth/SignHelper');
    * @param {Array.<String>} contentTypes
    * @returns {String} The chosen content type, preferring JSON.
    */
-  exports.prototype.jsonPreferredMime = function(contentTypes) {
+  exports.prototype.jsonPreferredMime = function (contentTypes) {
     for (var i = 0; i < contentTypes.length; i++) {
       if (this.isJsonMime(contentTypes[i])) {
         return contentTypes[i];
@@ -217,27 +207,27 @@ var awsv4 = require('./auth/SignHelper');
    * @param param The parameter to check.
    * @returns {Boolean} <code>true</code> if <code>param</code> represents a file.
    */
-  exports.prototype.isFileParam = function(param) {
+  exports.prototype.isFileParam = function (param) {
     // fs.ReadStream in Node.js and Electron (but not in runtime like browserify)
-    if (typeof require === 'function') {
+    if (typeof require === "function") {
       var fs;
       try {
-        fs = require('fs');
+        fs = require("fs");
       } catch (err) {}
       if (fs && fs.ReadStream && param instanceof fs.ReadStream) {
         return true;
       }
     }
     // Buffer in Node.js
-    if (typeof Buffer === 'function' && param instanceof Buffer) {
+    if (typeof Buffer === "function" && param instanceof Buffer) {
       return true;
     }
     // Blob in browser
-    if (typeof Blob === 'function' && param instanceof Blob) {
+    if (typeof Blob === "function" && param instanceof Blob) {
       return true;
     }
     // File in browser (it seems File object is also instance of Blob, but keep this for safe)
-    if (typeof File === 'function' && param instanceof File) {
+    if (typeof File === "function" && param instanceof File) {
       return true;
     }
     return false;
@@ -253,10 +243,14 @@ var awsv4 = require('./auth/SignHelper');
    * @param {Object.<String, Object>} params The parameters as object properties.
    * @returns {Object.<String, Object>} normalized parameters.
    */
-  exports.prototype.normalizeParams = function(params) {
+  exports.prototype.normalizeParams = function (params) {
     var newParams = {};
     for (var key in params) {
-      if (params.hasOwnProperty(key) && params[key] != undefined && params[key] != null) {
+      if (
+        params.hasOwnProperty(key) &&
+        params[key] != undefined &&
+        params[key] != null
+      ) {
         var value = params[key];
         if (this.isFileParam(value) || Array.isArray(value)) {
           newParams[key] = value;
@@ -278,27 +272,27 @@ var awsv4 = require('./auth/SignHelper');
      * Comma-separated values. Value: <code>csv</code>
      * @const
      */
-    CSV: ',',
+    CSV: ",",
     /**
      * Space-separated values. Value: <code>ssv</code>
      * @const
      */
-    SSV: ' ',
+    SSV: " ",
     /**
      * Tab-separated values. Value: <code>tsv</code>
      * @const
      */
-    TSV: '\t',
+    TSV: "\t",
     /**
      * Pipe(|)-separated values. Value: <code>pipes</code>
      * @const
      */
-    PIPES: '|',
+    PIPES: "|",
     /**
      * Native array. Value: <code>multi</code>
      * @const
      */
-    MULTI: 'multi'
+    MULTI: "multi",
   };
 
   /**
@@ -308,24 +302,27 @@ var awsv4 = require('./auth/SignHelper');
    * @returns {String|Array} A string representation of the supplied collection, using the specified delimiter. Returns
    * <code>param</code> as is if <code>collectionFormat</code> is <code>multi</code>.
    */
-  exports.prototype.buildCollectionParam = function buildCollectionParam(param, collectionFormat) {
+  exports.prototype.buildCollectionParam = function buildCollectionParam(
+    param,
+    collectionFormat
+  ) {
     if (param == null) {
       return null;
     }
     switch (collectionFormat) {
-      case 'csv':
-        return param.map(this.paramToString).join(',');
-      case 'ssv':
-        return param.map(this.paramToString).join(' ');
-      case 'tsv':
-        return param.map(this.paramToString).join('\t');
-      case 'pipes':
-        return param.map(this.paramToString).join('|');
-      case 'multi':
+      case "csv":
+        return param.map(this.paramToString).join(",");
+      case "ssv":
+        return param.map(this.paramToString).join(" ");
+      case "tsv":
+        return param.map(this.paramToString).join("\t");
+      case "pipes":
+        return param.map(this.paramToString).join("|");
+      case "multi":
         // return the array directly as SuperAgent will handle it as expected
         return param.map(this.paramToString);
       default:
-        throw new Error('Unknown collection format: ' + collectionFormat);
+        throw new Error("Unknown collection format: " + collectionFormat);
     }
   };
 
@@ -345,7 +342,12 @@ var awsv4 = require('./auth/SignHelper');
     // Rely on SuperAgent for parsing response body.
     // See http://visionmedia.github.io/superagent/#parsing-response-bodies
     var data = response.body;
-    if (data == null || (typeof data === 'object' && typeof data.length === 'undefined' && !Object.keys(data).length)) {
+    if (
+      data == null ||
+      (typeof data === "object" &&
+        typeof data.length === "undefined" &&
+        !Object.keys(data).length)
+    ) {
       // SuperAgent does not always produce a body; use the unparsed response as a fallback
       data = response.text;
     }
@@ -369,13 +371,31 @@ var awsv4 = require('./auth/SignHelper');
    * constructor for a complex type.
    * @returns {Promise} A {@link https://www.promisejs.org/|Promise} object.
    */
-  exports.prototype.callApi = function callApi(path, httpMethod, apiName, pathParams,
-      queryParams, collectionQueryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts,
-      returnType) {
-
+  exports.prototype.callApi = function callApi(
+    path,
+    httpMethod,
+    apiName,
+    pathParams,
+    queryParams,
+    collectionQueryParams,
+    headerParams,
+    formParams,
+    bodyParam,
+    authNames,
+    contentTypes,
+    accepts,
+    returnType
+  ) {
     // Throw error if credentials are not specified
-    if (this.accessKey === undefined || this.secretKey === undefined || this.accessKey === null || this.secretKey === null) {
-      throw new Error("Missing Credentials. Please specify accessKey and secretKey in client object.");
+    if (
+      this.accessKey === undefined ||
+      this.secretKey === undefined ||
+      this.accessKey === null ||
+      this.secretKey === null
+    ) {
+      throw new Error(
+        "Missing Credentials. Please specify accessKey and secretKey in client object."
+      );
     }
 
     var _this = this;
@@ -383,22 +403,32 @@ var awsv4 = require('./auth/SignHelper');
     var request = superagent(httpMethod, url);
 
     // apply authentications
-    var region = this.region
-    var service = 'ProductAdvertisingAPI';
+    var region = this.region;
+    var service = "ProductAdvertisingAPI";
     var timestamp = Date.now();
 
     var requestHeaders = {
-      'content-encoding': 'amz-1.0',
-      'content-type': 'application/json; charset=utf-8',
-      'host': this.host,
-      'x-amz-target': 'com.amazon.paapi5.v1.ProductAdvertisingAPIv1.' + apiName,
-      'x-amz-date': awsv4.toAmzDate(timestamp)
+      "content-encoding": "amz-1.0",
+      "content-type": "application/json; charset=utf-8",
+      host: this.host,
+      "x-amz-target": "com.amazon.paapi5.v1.ProductAdvertisingAPIv1." + apiName,
+      "x-amz-date": awsv4.toAmzDate(timestamp),
     };
 
-    var authorizationHeader = awsv4.createAuthorizationHeader(this.accessKey, this.secretKey, requestHeaders, httpMethod, path, bodyParam, region, service, timestamp);
+    var authorizationHeader = awsv4.createAuthorizationHeader(
+      this.accessKey,
+      this.secretKey,
+      requestHeaders,
+      httpMethod,
+      path,
+      bodyParam,
+      region,
+      service,
+      timestamp
+    );
 
     var authHeader = {
-      'Authorization': authorizationHeader
+      Authorization: authorizationHeader,
     };
     request.set(authHeader);
 
@@ -406,29 +436,34 @@ var awsv4 = require('./auth/SignHelper');
     for (var key in collectionQueryParams) {
       if (collectionQueryParams.hasOwnProperty(key)) {
         var param = collectionQueryParams[key];
-        if (param.collectionFormat === 'csv') {
+        if (param.collectionFormat === "csv") {
           // SuperAgent normally percent-encodes all reserved characters in a query parameter. However,
           // commas are used as delimiters for the 'csv' collectionFormat so they must not be encoded. We
           // must therefore construct and encode 'csv' collection query parameters manually.
           if (param.value != null) {
-            var value = param.value.map(this.paramToString).map(encodeURIComponent).join(',');
+            var value = param.value
+              .map(this.paramToString)
+              .map(encodeURIComponent)
+              .join(",");
             request.query(encodeURIComponent(key) + "=" + value);
           }
         } else {
           // All other collection query parameters should be treated as ordinary query parameters.
-          queryParams[key] = this.buildCollectionParam(param.value, param.collectionFormat);
+          queryParams[key] = this.buildCollectionParam(
+            param.value,
+            param.collectionFormat
+          );
         }
       }
     }
 
     // set query parameters
-    if (httpMethod.toUpperCase() === 'GET' && this.cache === false) {
-        queryParams['_'] = new Date().getTime();
+    if (httpMethod.toUpperCase() === "GET" && this.cache === false) {
+      queryParams["_"] = new Date().getTime();
     }
 
     // set header parameters
     request.set(requestHeaders);
-
 
     // set requestAgent if it is set by user
     request.set(this.requestAgent);
@@ -436,19 +471,19 @@ var awsv4 = require('./auth/SignHelper');
     // set request timeout
     request.timeout(this.timeout);
 
-    var contentType = 'application/json; charset=utf-8';
+    var contentType = "application/json; charset=utf-8";
     if (contentType) {
       // Issue with superagent and multipart/form-data (https://github.com/visionmedia/superagent/issues/746)
-      if(contentType != 'multipart/form-data') {
+      if (contentType != "multipart/form-data") {
         request.type(contentType);
       }
-    } else if (!request.header['Content-Type']) {
-      request.type('application/json');
+    } else if (!request.header["Content-Type"]) {
+      request.type("application/json");
     }
 
-    if (contentType === 'application/x-www-form-urlencoded') {
+    if (contentType === "application/x-www-form-urlencoded") {
       request.send(querystring.stringify(this.normalizeParams(formParams)));
-    } else if (contentType == 'multipart/form-data') {
+    } else if (contentType == "multipart/form-data") {
       var _formParams = this.normalizeParams(formParams);
       for (var key in _formParams) {
         if (_formParams.hasOwnProperty(key)) {
@@ -469,33 +504,32 @@ var awsv4 = require('./auth/SignHelper');
       request.accept(accept);
     }
 
-    if (returnType === 'Blob') {
-      request.responseType('blob');
-    } else if (returnType === 'String') {
-      request.responseType('string');
+    if (returnType === "Blob") {
+      request.responseType("blob");
+    } else if (returnType === "String") {
+      request.responseType("string");
     }
 
     // Attach previously saved cookies, if enabled
-    if (this.enableCookies){
-      if (typeof window === 'undefined') {
+    if (this.enableCookies) {
+      if (typeof window === "undefined") {
         this.agent.attachCookies(request);
-      }
-      else {
+      } else {
         request.withCredentials();
       }
     }
 
-    return new Promise(function(resolve, reject) {
-      request.end(function(error, response) {
+    return new Promise(function (resolve, reject) {
+      request.end(function (error, response) {
         if (error) {
           reject(error);
         } else {
           try {
             var data = _this.deserialize(response, returnType);
-            if (_this.enableCookies && typeof window === 'undefined'){
+            if (_this.enableCookies && typeof window === "undefined") {
               _this.agent.saveCookies(response);
             }
-            resolve({data: data, response: response});
+            resolve({ data: data, response: response });
           } catch (err) {
             reject(err);
           }
@@ -509,8 +543,8 @@ var awsv4 = require('./auth/SignHelper');
    * @param {String} str The date value as a string.
    * @returns {Date} The parsed date object.
    */
-  exports.parseDate = function(str) {
-    return new Date(str.replace(/T/i, ' '));
+  exports.parseDate = function (str) {
+    return new Date(str.replace(/T/i, " "));
   };
 
   /**
@@ -522,37 +556,36 @@ var awsv4 = require('./auth/SignHelper');
    * all properties on <code>data<code> will be converted to this type.
    * @returns An instance of the specified type or null or undefined if data is null or undefined.
    */
-  exports.convertToType = function(data, type) {
-    if (data === null || data === undefined)
-      return data
+  exports.convertToType = function (data, type) {
+    if (data === null || data === undefined) return data;
 
     switch (type) {
-      case 'Boolean':
+      case "Boolean":
         return Boolean(data);
-      case 'Integer':
+      case "Integer":
         return parseInt(data, 10);
-      case 'Number':
+      case "Number":
         return parseFloat(data);
-      case 'String':
+      case "String":
         return String(data);
-      case 'Date':
+      case "Date":
         return this.parseDate(String(data));
-      case 'Blob':
-      	return data;
+      case "Blob":
+        return data;
       default:
         if (type === Object) {
           // generic object, return directly
           return data;
-        } else if (typeof type === 'function') {
+        } else if (typeof type === "function") {
           // for model type like: User
           return type.constructFromObject(data);
         } else if (Array.isArray(type)) {
           // for array type like: ['String']
           var itemType = type[0];
-          return data.map(function(item) {
+          return data.map(function (item) {
             return exports.convertToType(item, itemType);
           });
-        } else if (typeof type === 'object') {
+        } else if (typeof type === "object") {
           // for plain object type like: {'String': 'Integer'}
           var keyType, valueType;
           for (var k in type) {
@@ -583,7 +616,7 @@ var awsv4 = require('./auth/SignHelper');
    * @param data {Object|Array} The REST data.
    * @param obj {Object|Array} The target object or array.
    */
-  exports.constructFromObject = function(data, obj, itemType) {
+  exports.constructFromObject = function (data, obj, itemType) {
     if (Array.isArray(data)) {
       for (var i = 0; i < data.length; i++) {
         if (data.hasOwnProperty(i))
@@ -604,4 +637,6 @@ var awsv4 = require('./auth/SignHelper');
   exports.instance = new exports();
 
   return exports;
-}));
+})();
+
+export default exports;

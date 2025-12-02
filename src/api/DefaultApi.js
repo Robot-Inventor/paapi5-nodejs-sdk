@@ -25,23 +25,20 @@
  * https://webservices.amazon.com/paapi5/documentation/index.html
  *
  */
+import ApiClient from '../ApiClient.js';
+import GetBrowseNodesRequest from '../model/GetBrowseNodesRequest.js';
+import GetBrowseNodesResponse from '../model/GetBrowseNodesResponse.js';
+import GetItemsRequest from '../model/GetItemsRequest.js';
+import GetItemsResponse from '../model/GetItemsResponse.js';
+import GetVariationsRequest from '../model/GetVariationsRequest.js';
+import GetVariationsResponse from '../model/GetVariationsResponse.js';
+import ProductAdvertisingAPIClientException from '../model/ProductAdvertisingAPIClientException.js';
+import ProductAdvertisingAPIServiceException from '../model/ProductAdvertisingAPIServiceException.js';
+import SearchItemsRequest from '../model/SearchItemsRequest.js';
+import SearchItemsResponse from '../model/SearchItemsResponse.js';
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/GetBrowseNodesRequest', 'model/GetBrowseNodesResponse', 'model/GetItemsRequest', 'model/GetItemsResponse', 'model/GetVariationsRequest', 'model/GetVariationsResponse', 'model/ProductAdvertisingAPIClientException', 'model/ProductAdvertisingAPIServiceException', 'model/SearchItemsRequest', 'model/SearchItemsResponse'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/GetBrowseNodesRequest'), require('../model/GetBrowseNodesResponse'), require('../model/GetItemsRequest'), require('../model/GetItemsResponse'), require('../model/GetVariationsRequest'), require('../model/GetVariationsResponse'), require('../model/ProductAdvertisingAPIClientException'), require('../model/ProductAdvertisingAPIServiceException'), require('../model/SearchItemsRequest'), require('../model/SearchItemsResponse'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.ProductAdvertisingAPIv1) {
-      root.ProductAdvertisingAPIv1 = {};
-    }
-    root.ProductAdvertisingAPIv1.DefaultApi = factory(root.ProductAdvertisingAPIv1.ApiClient, root.ProductAdvertisingAPIv1.GetBrowseNodesRequest, root.ProductAdvertisingAPIv1.GetBrowseNodesResponse, root.ProductAdvertisingAPIv1.GetItemsRequest, root.ProductAdvertisingAPIv1.GetItemsResponse, root.ProductAdvertisingAPIv1.GetVariationsRequest, root.ProductAdvertisingAPIv1.GetVariationsResponse, root.ProductAdvertisingAPIv1.ProductAdvertisingAPIClientException, root.ProductAdvertisingAPIv1.ProductAdvertisingAPIServiceException, root.ProductAdvertisingAPIv1.SearchItemsRequest, root.ProductAdvertisingAPIv1.SearchItemsResponse);
-  }
-}(this, function(ApiClient, GetBrowseNodesRequest, GetBrowseNodesResponse, GetItemsRequest, GetItemsResponse, GetVariationsRequest, GetVariationsResponse, ProductAdvertisingAPIClientException, ProductAdvertisingAPIServiceException, SearchItemsRequest, SearchItemsResponse) {
-  'use strict';
+const exports = (() => {
+'use strict';
 
   /**
    * Default service.
@@ -253,5 +250,8 @@
     }
   };
 
+  
   return exports;
-}));
+})();
+
+export default exports;

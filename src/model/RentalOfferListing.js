@@ -18,23 +18,15 @@
  * https://webservices.amazon.com/paapi5/documentation/index.html
  *
  */
+import ApiClient from '../ApiClient.js';
+import DurationPrice from './DurationPrice.js';
+import OfferAvailability from './OfferAvailability.js';
+import OfferCondition from './OfferCondition.js';
+import OfferDeliveryInfo from './OfferDeliveryInfo.js';
+import OfferMerchantInfo from './OfferMerchantInfo.js';
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/DurationPrice', 'model/OfferAvailability', 'model/OfferCondition', 'model/OfferDeliveryInfo', 'model/OfferMerchantInfo'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./DurationPrice'), require('./OfferAvailability'), require('./OfferCondition'), require('./OfferDeliveryInfo'), require('./OfferMerchantInfo'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.ProductAdvertisingAPIv1) {
-      root.ProductAdvertisingAPIv1 = {};
-    }
-    root.ProductAdvertisingAPIv1.RentalOfferListing = factory(root.ProductAdvertisingAPIv1.ApiClient, root.ProductAdvertisingAPIv1.DurationPrice, root.ProductAdvertisingAPIv1.OfferAvailability, root.ProductAdvertisingAPIv1.OfferCondition, root.ProductAdvertisingAPIv1.OfferDeliveryInfo, root.ProductAdvertisingAPIv1.OfferMerchantInfo);
-  }
-}(this, function(ApiClient, DurationPrice, OfferAvailability, OfferCondition, OfferDeliveryInfo, OfferMerchantInfo) {
-  'use strict';
+const exports = (() => {
+'use strict';
 
 
 
@@ -121,7 +113,8 @@
 
 
 
+  
   return exports;
-}));
+})();
 
-
+export default exports;

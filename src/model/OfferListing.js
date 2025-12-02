@@ -18,23 +18,18 @@
  * https://webservices.amazon.com/paapi5/documentation/index.html
  *
  */
+import ApiClient from '../ApiClient.js';
+import OfferAvailability from './OfferAvailability.js';
+import OfferCondition from './OfferCondition.js';
+import OfferDeliveryInfo from './OfferDeliveryInfo.js';
+import OfferLoyaltyPoints from './OfferLoyaltyPoints.js';
+import OfferMerchantInfo from './OfferMerchantInfo.js';
+import OfferPrice from './OfferPrice.js';
+import OfferProgramEligibility from './OfferProgramEligibility.js';
+import OfferPromotion from './OfferPromotion.js';
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/OfferAvailability', 'model/OfferCondition', 'model/OfferDeliveryInfo', 'model/OfferLoyaltyPoints', 'model/OfferMerchantInfo', 'model/OfferPrice', 'model/OfferProgramEligibility', 'model/OfferPromotion'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./OfferAvailability'), require('./OfferCondition'), require('./OfferDeliveryInfo'), require('./OfferLoyaltyPoints'), require('./OfferMerchantInfo'), require('./OfferPrice'), require('./OfferProgramEligibility'), require('./OfferPromotion'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.ProductAdvertisingAPIv1) {
-      root.ProductAdvertisingAPIv1 = {};
-    }
-    root.ProductAdvertisingAPIv1.OfferListing = factory(root.ProductAdvertisingAPIv1.ApiClient, root.ProductAdvertisingAPIv1.OfferAvailability, root.ProductAdvertisingAPIv1.OfferCondition, root.ProductAdvertisingAPIv1.OfferDeliveryInfo, root.ProductAdvertisingAPIv1.OfferLoyaltyPoints, root.ProductAdvertisingAPIv1.OfferMerchantInfo, root.ProductAdvertisingAPIv1.OfferPrice, root.ProductAdvertisingAPIv1.OfferProgramEligibility, root.ProductAdvertisingAPIv1.OfferPromotion);
-  }
-}(this, function(ApiClient, OfferAvailability, OfferCondition, OfferDeliveryInfo, OfferLoyaltyPoints, OfferMerchantInfo, OfferPrice, OfferProgramEligibility, OfferPromotion) {
-  'use strict';
+const exports = (() => {
+'use strict';
 
 
 
@@ -169,7 +164,8 @@
 
 
 
+  
   return exports;
-}));
+})();
 
-
+export default exports;

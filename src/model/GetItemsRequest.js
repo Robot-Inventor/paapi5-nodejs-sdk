@@ -18,23 +18,17 @@
  * https://webservices.amazon.com/paapi5/documentation/index.html
  *
  */
+import ApiClient from '../ApiClient.js';
+import Condition from './Condition.js';
+import GetItemsResource from './GetItemsResource.js';
+import ItemIdType from './ItemIdType.js';
+import Merchant from './Merchant.js';
+import OfferCount from './OfferCount.js';
+import PartnerType from './PartnerType.js';
+import Properties from './Properties.js';
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/Condition', 'model/GetItemsResource', 'model/ItemIdType', 'model/Merchant', 'model/OfferCount', 'model/PartnerType', 'model/Properties'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./Condition'), require('./GetItemsResource'), require('./ItemIdType'), require('./Merchant'), require('./OfferCount'), require('./PartnerType'), require('./Properties'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.ProductAdvertisingAPIv1) {
-      root.ProductAdvertisingAPIv1 = {};
-    }
-    root.ProductAdvertisingAPIv1.GetItemsRequest = factory(root.ProductAdvertisingAPIv1.ApiClient, root.ProductAdvertisingAPIv1.Condition, root.ProductAdvertisingAPIv1.GetItemsResource, root.ProductAdvertisingAPIv1.ItemIdType, root.ProductAdvertisingAPIv1.Merchant, root.ProductAdvertisingAPIv1.OfferCount, root.ProductAdvertisingAPIv1.PartnerType, root.ProductAdvertisingAPIv1.Properties);
-  }
-}(this, function(ApiClient, Condition, GetItemsResource, ItemIdType, Merchant, OfferCount, PartnerType, Properties) {
-  'use strict';
+const exports = (() => {
+'use strict';
 
 
 
@@ -172,7 +166,8 @@
 
 
 
+  
   return exports;
-}));
+})();
 
-
+export default exports;

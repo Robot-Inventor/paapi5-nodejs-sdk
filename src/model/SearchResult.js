@@ -18,23 +18,12 @@
  * https://webservices.amazon.com/paapi5/documentation/index.html
  *
  */
+import ApiClient from '../ApiClient.js';
+import Item from './Item.js';
+import SearchRefinements from './SearchRefinements.js';
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/Item', 'model/SearchRefinements'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./Item'), require('./SearchRefinements'));
-  } else {
-    // Browser globals (root is window)
-    if (!root.ProductAdvertisingAPIv1) {
-      root.ProductAdvertisingAPIv1 = {};
-    }
-    root.ProductAdvertisingAPIv1.SearchResult = factory(root.ProductAdvertisingAPIv1.ApiClient, root.ProductAdvertisingAPIv1.Item, root.ProductAdvertisingAPIv1.SearchRefinements);
-  }
-}(this, function(ApiClient, Item, SearchRefinements) {
-  'use strict';
+const exports = (() => {
+'use strict';
 
 
 
@@ -105,7 +94,8 @@
 
 
 
+  
   return exports;
-}));
+})();
 
-
+export default exports;

@@ -19,37 +19,10 @@ The Product Advertising API NodeJS SDK can be installed via [npm](https://www.np
 npm install @robot-inventor/paapi5-nodejs-sdk --save
 ```
 
-You should now be able to `require('paapi5-nodejs-sdk')` in javascript files.
-
-### For browser
-
-The library also works in the browser environment via npm and [browserify](http://browserify.org/). After following
-the above steps with Node.js and installing browserify with `npm install -g browserify`,
-perform the following (assuming *main.js* is your entry file, that's to say your javascript file where you actually
-use this library):
-
-```shell
-browserify main.js > bundle.js
-```
-
-Then include *bundle.js* in the HTML pages.
-
-### Webpack Configuration
-
-Using Webpack you may encounter the following error: "Module not found: Error:
-Cannot resolve module", most certainly you should disable AMD loader. Add/merge
-the following section to your webpack config:
+This package is ESM-only. Import it in JavaScript/TypeScript with:
 
 ```javascript
-module: {
-  rules: [
-    {
-      parser: {
-        amd: false
-      }
-    }
-  ]
-}
+import ProductAdvertisingAPIv1 from '@robot-inventor/paapi5-nodejs-sdk';
 ```
 
 ## Getting Started
@@ -59,9 +32,9 @@ Please follow the [installation](#installation) instruction and execute the foll
 Simple example for [SearchItems](https://webservices.amazon.com/paapi5/documentation/search-items.html) to discover Amazon products with the keyword 'Harry Potter' in Books category:
 
 ```javascript
-var ProductAdvertisingAPIv1 = require('paapi5-nodejs-sdk');
+import ProductAdvertisingAPIv1 from '@robot-inventor/paapi5-nodejs-sdk';
 
-var defaultClient = ProductAdvertisingAPIv1.ApiClient.instance;
+const defaultClient = ProductAdvertisingAPIv1.ApiClient.instance;
 
 // Specify your credentials here. These are used to create and sign the request.
 defaultClient.accessKey = '<YOUR ACCESS KEY>';
@@ -74,11 +47,11 @@ defaultClient.secretKey = '<YOUR SECRET KEY>';
 defaultClient.host = 'webservices.amazon.com';
 defaultClient.region = 'us-east-1';
 
-var api = new ProductAdvertisingAPIv1.DefaultApi();
+const api = new ProductAdvertisingAPIv1.DefaultApi();
 
 // Request Initialization
 
-var searchItemsRequest = new ProductAdvertisingAPIv1.SearchItemsRequest();
+const searchItemsRequest = new ProductAdvertisingAPIv1.SearchItemsRequest();
 
 /** Enter your partner tag (store/tracking id) and partner type */
 searchItemsRequest['PartnerTag'] = '<YOUR PARTNER TAG>';
