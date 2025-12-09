@@ -5,7 +5,35 @@
   "license": "Apache-2.0",
   "type": "module",
   "main": "src/index.js",
-  "exports": "./src/index.js",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./ApiClient": {
+      "types": "./types/ApiClient.d.ts",
+      "default": "./src/ApiClient.js"
+    },
+    "./api/*": {
+      "types": "./types/api/*.d.ts",
+      "default": "./src/api/*.js"
+    },
+    "./auth/*": {
+      "types": "./types/auth/*.d.ts",
+      "default": "./src/auth/*.js"
+    },
+    "./model/*": {
+      "types": "./types/model/*.d.ts",
+      "default": "./src/model/*.js"
+    },
+    "./src/*": {
+      "types": "./types/*.d.ts",
+      "default": "./src/*.js"
+    },
+    "./types/*": {
+      "types": "./types/*.d.ts"
+    }
+  },
   "scripts": {
     "test": "mocha --recursive",
     "ci:version": "changeset version",
@@ -57,6 +85,21 @@
   "typesVersions": {
     "*": {
       "src/*": [
+        "types/*"
+      ],
+      "api/*": [
+        "types/api/*"
+      ],
+      "auth/*": [
+        "types/auth/*"
+      ],
+      "model/*": [
+        "types/model/*"
+      ],
+      "ApiClient": [
+        "types/ApiClient.d.ts"
+      ],
+      "types/*": [
         "types/*"
       ]
     }
