@@ -1,5 +1,11 @@
 # @robot-inventor/paapi5-nodejs-sdk
 
+## 0.1.1
+
+### Patch Changes
+
+- [#29](https://github.com/Robot-Inventor/paapi5-nodejs-sdk/pull/29) [`4fa0477`](https://github.com/Robot-Inventor/paapi5-nodejs-sdk/commit/4fa04771c941336b1705154fbae7d75c690630da) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - fix: resolve type declaration issues
+
 ## 0.1.0
 
 ### Minor Changes
