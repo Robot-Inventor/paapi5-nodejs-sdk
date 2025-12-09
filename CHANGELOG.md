@@ -1,5 +1,11 @@
 # @robot-inventor/paapi5-nodejs-sdk
 
+## 0.1.0
+
+### Minor Changes
+
+- [#27](https://github.com/Robot-Inventor/paapi5-nodejs-sdk/pull/27) [`4ae1b9a`](https://github.com/Robot-Inventor/paapi5-nodejs-sdk/commit/4ae1b9afdb705309c8457895942dc0b7169e05af) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - feat: migrate to ESM
+
 ## 0.0.3
 
 ### Patch Changes
