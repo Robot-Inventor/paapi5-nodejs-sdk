@@ -58,7 +58,7 @@
   },
   "dependencies": {
     "crypto-js": "^4.2.0",
-    "superagent": "10.2.3"
+    "superagent": "10.3.0"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.1",
