@@ -1,5 +1,15 @@
 # @robot-inventor/paapi5-nodejs-sdk
 
+## 0.1.3
+
+### Patch Changes
+
+- [#36](https://github.com/Robot-Inventor/paapi5-nodejs-sdk/pull/36) [`50b7fd9`](https://github.com/Robot-Inventor/paapi5-nodejs-sdk/commit/50b7fd9a1027191412e567c6830106314b5ce8de) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency superagent to v10.3.0
+
+- [#43](https://github.com/Robot-Inventor/paapi5-nodejs-sdk/pull/43) [`6f36447`](https://github.com/Robot-Inventor/paapi5-nodejs-sdk/commit/6f36447d970014831dcd0015282d5bd3e3ed2274) Thanks [@renovate](https://github.com/apps/renovate)! - chore(deps): update dependency sinon to v21.0.2
+
+- [#38](https://github.com/Robot-Inventor/paapi5-nodejs-sdk/pull/38) [`327d120`](https://github.com/Robot-Inventor/paapi5-nodejs-sdk/commit/327d12007e37d70a2f6af8f5302af47097a2fc06) Thanks [@dependabot](https://github.com/apps/dependabot)! - chore(deps): bump qs from 6.14.1 to 6.14.2
+
 ## 0.1.2
 
 ### Patch Changes
