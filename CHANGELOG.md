@@ -1,5 +1,11 @@
 # @robot-inventor/paapi5-nodejs-sdk
 
+## 0.1.5
+
+### Patch Changes
+
+- [#48](https://github.com/Robot-Inventor/paapi5-nodejs-sdk/pull/48) [`d177c90`](https://github.com/Robot-Inventor/paapi5-nodejs-sdk/commit/d177c90ec6e6ce5203246bcd979ce07acfaf4a97) Thanks [@dependabot](https://github.com/apps/dependabot)! - chore(deps-dev): bump flatted from 3.3.3 to 3.4.2
+
 ## 0.1.4
 
 ### Patch Changes
