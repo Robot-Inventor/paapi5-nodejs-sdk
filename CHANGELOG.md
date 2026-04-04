@@ -1,5 +1,11 @@
 # @robot-inventor/paapi5-nodejs-sdk
 
+## 0.1.6
+
+### Patch Changes
+
+- [#52](https://github.com/Robot-Inventor/paapi5-nodejs-sdk/pull/52) [`9c83027`](https://github.com/Robot-Inventor/paapi5-nodejs-sdk/commit/9c830272e7a9493dc786d765ca117b5fcdc2e342) Thanks [@dependabot](https://github.com/apps/dependabot)! - chore(deps-dev): bump picomatch from 2.3.1 to 2.3.2
+
 ## 0.1.5
 
 ### Patch Changes
