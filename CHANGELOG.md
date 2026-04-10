@@ -1,5 +1,11 @@
 # @robot-inventor/paapi5-nodejs-sdk
 
+## 0.1.8
+
+### Patch Changes
+
+- [#56](https://github.com/Robot-Inventor/paapi5-nodejs-sdk/pull/56) [`6c7360e`](https://github.com/Robot-Inventor/paapi5-nodejs-sdk/commit/6c7360ec7f05c649b9c350b3bf6df2fe4d746126) Thanks [@renovate](https://github.com/apps/renovate)! - chore(deps): update dependency sinon to v21.1.1
+
 ## 0.1.7
 
 ### Patch Changes
